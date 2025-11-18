@@ -1,0 +1,231 @@
+// Prisma schema for Quant Trading Platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model StockPrice {
+  id             Int      @id @default(autoincrement())
+  symbol         String
+  timestamp      DateTime
+  open           Float
+  high           Float
+  low            Float
+  close          Float
+  volume         BigInt
+  adjustedClose  Float?
+  createdAt      DateTime @default(now())
+
+  @@unique([symbol, timestamp])
+  @@index([symbol])
+  @@index([timestamp])
+}
+
+model OptionPrice {
+  id                 Int      @id @default(autoincrement())
+  symbol             String
+  underlying         String
+  strike             Float
+  expiration         DateTime
+  type               String   // 'call' or 'put'
+  timestamp          DateTime
+  bid                Float
+  ask                Float
+  last               Float
+  volume             BigInt
+  openInterest       BigInt
+  impliedVolatility  Float
+  delta              Float?
+  gamma              Float?
+  theta              Float?
+  vega               Float?
+  rho                Float?
+  createdAt          DateTime @default(now())
+
+  @@unique([symbol, timestamp])
+  @@index([underlying])
+  @@index([expiration])
+  @@index([timestamp])
+}
+
+model Trade {
+  id           Int      @id @default(autoincrement())
+  timestamp    DateTime
+  symbol       String
+  type         String   // 'BUY' or 'SELL'
+  quantity     Float
+  price        Float
+  commission   Float
+  slippage     Float
+  strategyId   String
+  backtestId   Int?
+  backtest     Backtest? @relation(fields: [backtestId], references: [id])
+  realizedPnL  Float?
+  createdAt    DateTime @default(now())
+
+  @@index([symbol])
+  @@index([strategyId])
+  @@index([backtestId])
+  @@index([timestamp])
+}
+
+model Signal {
+  id         Int      @id @default(autoincrement())
+  timestamp  DateTime
+  symbol     String
+  type       String   // 'BUY', 'SELL', 'HOLD'
+  strategy   String
+  entry      Float
+  target     Float?
+  stopLoss   Float?
+  confidence Float
+  metadata   String?  // JSON string
+  executed   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([symbol])
+  @@index([strategy])
+  @@index([timestamp])
+  @@index([executed])
+}
+
+model Backtest {
+  id                    Int      @id @default(autoincrement())
+  strategyName          String
+  symbol                String
+  startDate             DateTime
+  endDate               DateTime
+  initialCapital        Float
+  finalCapital          Float
+  totalReturn           Float
+  totalReturnPercent    Float
+  annualizedReturn      Float
+  sharpeRatio           Float
+  sortinoRatio          Float
+  maxDrawdown           Float
+  maxDrawdownPercent    Float
+  winRate               Float
+  profitFactor          Float
+  totalTrades           Int
+  winningTrades         Int
+  losingTrades          Int
+  averageWin            Float
+  averageLoss           Float
+  largestWin            Float
+  largestLoss           Float
+  averageHoldingPeriod  Float
+  parameters            String   // JSON string
+  equityCurve           String   // JSON string
+  trades                Trade[]
+  createdAt             DateTime @default(now())
+
+  @@index([strategyName])
+  @@index([symbol])
+  @@index([createdAt])
+}
+
+model Strategy {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  type         String
+  description  String
+  parameters   String   // JSON string
+  enabled      Boolean  @default(true)
+  capital      Float
+  maxPositions Int
+  riskPerTrade Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([type])
+  @@index([enabled])
+}
+
+model IVRankHistory {
+  id                    Int      @id @default(autoincrement())
+  symbol                String
+  timestamp             DateTime
+  currentIV             Float
+  ivRank                Float
+  ivPercentile          Float
+  historicalVolatility  Float
+  ivHVSpread            Float
+  createdAt             DateTime @default(now())
+
+  @@unique([symbol, timestamp])
+  @@index([symbol])
+  @@index([timestamp])
+}
+
+model UnusualOptionsActivity {
+  id            Int      @id @default(autoincrement())
+  timestamp     DateTime
+  symbol        String
+  optionSymbol  String
+  type          String   // 'call' or 'put'
+  strike        Float
+  expiration    DateTime
+  premium       Float
+  volume        BigInt
+  openInterest  BigInt
+  volumeOIRatio Float
+  sentiment     String   // 'BULLISH', 'BEARISH', 'NEUTRAL'
+  isUnusual     Boolean
+  createdAt     DateTime @default(now())
+
+  @@index([symbol])
+  @@index([timestamp])
+  @@index([isUnusual])
+}
+
+model ArbitrageOpportunity {
+  id                 Int      @id @default(autoincrement())
+  timestamp          DateTime
+  type               String
+  symbol             String
+  profitPerContract  Float
+  roi                Float
+  risk               String   // 'low', 'medium', 'high'
+  legs               String   // JSON string
+  description        String
+  executed           Boolean  @default(false)
+  createdAt          DateTime @default(now())
+
+  @@index([symbol])
+  @@index([timestamp])
+  @@index([executed])
+}
+
+model Portfolio {
+  id              Int      @id @default(autoincrement())
+  timestamp       DateTime @default(now())
+  cash            Float
+  positions       String   // JSON string
+  totalValue      Float
+  totalPnL        Float
+  totalPnLPercent Float
+  dayPnL          Float
+  dayPnLPercent   Float
+  createdAt       DateTime @default(now())
+
+  @@index([timestamp])
+}
+
+model MarketData {
+  id        Int      @id @default(autoincrement())
+  symbol    String
+  timestamp DateTime
+  data      String   // JSON string for flexible data storage
+  dataType  String   // 'stock', 'option', 'index', 'vix', etc.
+  createdAt DateTime @default(now())
+
+  @@unique([symbol, timestamp, dataType])
+  @@index([symbol])
+  @@index([dataType])
+  @@index([timestamp])
+}
