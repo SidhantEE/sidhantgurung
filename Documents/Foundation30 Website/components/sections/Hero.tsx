@@ -52,7 +52,7 @@ export function Hero() {
       <div className="container relative z-20 mx-auto flex h-full flex-col justify-center px-4 md:px-6">
         <div className="max-w-3xl space-y-6">
           <h1 className="font-display text-3xl font-medium uppercase leading-tight tracking-tight text-white drop-shadow-lg md:text-5xl lg:text-6xl">
-            Doanh nghiệp hình mẫu <br className="hidden md:block" />
+            Doanh nghiệp hình mẫu<br />
             <span className="text-primary-gold">trong kỷ nguyên hiện đại</span>
           </h1>
 
