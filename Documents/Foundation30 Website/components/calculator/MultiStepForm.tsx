@@ -31,29 +31,45 @@ const STEPS = [
   { id: "phone", label: "2. Số điện thoại *", type: "tel", placeholder: "0912 345 678" },
   { id: "email", label: "3. Email doanh nghiệp *", type: "email", placeholder: "name@company.com" },
   { id: "position", label: "4. Chức danh", type: "text", placeholder: "CEO, Giám đốc..." },
-  { 
-    id: "industry", 
-    label: "5. Lĩnh vực hoạt động", 
-    type: "select", 
-    options: ["Bán lẻ FMCG", "Công nghệ thông tin", "Sản xuất dệt may", "Sản xuất điện tử", "Dịch vụ tài chính", "Startup", "Xây dựng và bất động sản", "Khác"] 
+  {
+    id: "industry",
+    label: "5. Lĩnh vực hoạt động",
+    type: "select",
+    options: [
+      "Bán lẻ/tiêu dùng nhanh (FMCG)",
+      "Công nghệ thông tin (IT)",
+      "Sản xuất dệt may và quần áo",
+      "Sản xuất điện tử",
+      "Dịch vụ tài chính",
+      "Khởi nghiệp",
+      "Xây dựng và phát triển bất động sản",
+      "Nông nghiệp",
+      "Bệnh viện/dịch vụ y tế",
+      "Sản xuất công nghiệp",
+      "An ninh",
+      "Vận chuyển/logistics",
+      "Ngoại giao/lãnh sự",
+      "Cơ quan hành chính nhà nước",
+      "Khác"
+    ]
   },
-  { 
-    id: "companySize", 
-    label: "6. Quy mô nhân sự", 
-    type: "select", 
-    options: ["Dưới 10 nhân sự", "10 - 30 nhân sự", "30 - 100 nhân sự", "100 - 500 nhân sự", "Trên 500 nhân sự"] 
+  {
+    id: "companySize",
+    label: "6. Quy mô nhân sự hiện tại của quý doanh nghiệp là bao nhiêu?",
+    type: "select",
+    options: ["Dưới 10 nhân sự", "10 - 30 nhân sự", "30 - 100 nhân sự", "100 - 500 nhân sự", "Trên 500 nhân sự"]
   },
-  { 
-    id: "priority", 
-    label: "7. Ưu tiên chính của doanh nghiệp", 
-    type: "select", 
-    options: ["Giữ chân và thu hút nhân tài", "Kiểm soát và tối ưu chi phí", "Bảo vệ đội ngũ lãnh đạo", "Nâng cao năng suất làm việc", "Chăm sóc sức khỏe toàn diện"] 
+  {
+    id: "priority",
+    label: "7. Ưu tiên chính của quý doanh nghiệp khi triển khai phúc lợi sức khỏe là gì?",
+    type: "select",
+    options: ["Giữ chân và thu hút nhân tài", "Kiểm soát và tối ưu chi phí", "Bảo vệ đội ngũ lãnh đạo", "Nâng cao năng suất làm việc", "Chăm sóc sức khỏe toàn diện cho nhân sự"]
   },
-  { 
-    id: "employeeGroup", 
-    label: "8. Nhóm nhân sự ưu tiên", 
-    type: "select", 
-    options: ["Toàn bộ nhân sự", "Cấp quản lý / điều hành", "Nhà sáng lập / đội ngũ lãnh đạo", "Nhóm tạo doanh thu"] 
+  {
+    id: "employeeGroup",
+    label: "8. Nhóm nhân sự nào được quý doanh nghiệp ưu tiên bảo vệ trước tiên?",
+    type: "select",
+    options: ["Toàn bộ nhân sự", "Cấp quản lý / điều hành", "Nhà sáng lập / đội ngũ lãnh đạo", "Nhóm tạo doanh thu (kinh doanh, kỹ thuật, vận hành)"]
   },
 ];
 

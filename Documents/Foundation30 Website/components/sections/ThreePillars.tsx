@@ -11,7 +11,7 @@ const PILLARS = [
     eyebrow: "SỨC KHỎE",
     title: "Sức khỏe toàn diện",
     description:
-      "Thiết kế bảo hiểm sức khỏe, chi phí và lối sống khỏe mạnh cho từng nhóm nhân viên. Chúng tôi mang đến giải pháp chăm sóc y tế đẳng cấp, đảm bảo sự an tâm tuyệt đối cho đội ngũ của bạn.",
+      "Thiết kế bảo hiểm sức khỏe, chi phí và lối sống khỏe mạnh cho từng nhóm nhân viên",
     image: "/images/young-japanese-woman-white-skirt-outdoors.jpg",
     gradient: "from-primary-navy/40 to-primary-navy",
   },
@@ -20,7 +20,7 @@ const PILLARS = [
     eyebrow: "THỊNH VƯỢNG",
     title: "An tâm tài chính",
     description:
-      "Bảo vệ tài chính trước những rủi ro và những giải pháp bền vững cho một sự ổn định dài hạn. Chiến lược đầu tư và bảo vệ tài sản thông minh giúp doanh nghiệp phát triển vững chắc.",
+      "Bảo vệ tài chính trước những rủi ro và những giải pháp bền vững cho một sự ổn định dài hạn.",
     image: "/images/japanese-business-concept-with-business-partners-min.jpg",
     gradient: "from-primary-navy/40 to-primary-navy",
   },
@@ -29,7 +29,7 @@ const PILLARS = [
     eyebrow: "TRÍ TUỆ",
     title: "Tầm nhìn lãnh đạo",
     description:
-      "Lãnh đạo dựa trên phúc lợi, niềm tin, sự an toàn và tầm nhìn dài hạn. Xây dựng văn hóa doanh nghiệp ưu việt thông qua sự thấu hiểu và các giải pháp nhân sự tiên tiến.",
+      "Lãnh đạo dựa trên phúc lợi, niềm tin, sự an toàn và tầm nhìn dài hạn.",
     image: "/images/businessman-getting-off-car-2.avif",
     gradient: "from-primary-navy/40 to-primary-navy",
   },
@@ -174,14 +174,14 @@ function PillarTextBlock({
         transition={{ duration: 0.5, delay: 0 }}
         className="relative z-10"
       >
-        <span className="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary-gold/30 bg-primary-gold/10 text-primary-gold text-sm font-medium tracking-wider">
+        <span className="inline-block mb-6 px-5 py-2 rounded-full border border-primary-gold/30 bg-primary-gold/10 text-primary-gold text-base font-semibold tracking-wider">
           {pillar.eyebrow}
         </span>
-        <h3 className="font-display text-3xl md:text-5xl font-medium text-secondary-tan mb-6 leading-tight">
+        <h3 className="font-display text-4xl md:text-6xl font-medium text-secondary-tan mb-8 leading-tight">
           {pillar.title}
         </h3>
 
-        <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl">
+        <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-xl">
           {pillar.description}
         </p>
 

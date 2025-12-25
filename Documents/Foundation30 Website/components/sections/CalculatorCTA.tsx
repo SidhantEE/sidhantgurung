@@ -10,8 +10,8 @@ export function CalculatorCTA() {
   const benefits = [
     "Tạo ra phúc lợi trực tiếp cho nhân viên",
     "Thu hút và giữ chân nhân tài",
-    "Tối ưu chi phí bảo hiểm",
-    "Tối ưu hóa thuế doanh nghiệp"
+    "Tiết kiệm chi phí bảo hiểm dài hạn bằng tài khoản tiền mặt của hợp đồng bảo hiểm",
+    "Tiết kiệm thuế cho doanh nghiệp"
   ];
 
 
@@ -36,7 +36,7 @@ export function CalculatorCTA() {
                     </h2>
 
                     <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto md:mx-0">
-                         Foundation30 thuộc AIA Vietnam cung cấp giải pháp bảo hiểm nhân thọ và y tế tối ưu cho khách hàng thu nhập cao và tổ chức kinh doanh.
+                         Foundation30 thuộc AIA Vietnam là đại lý được cấp chứng chỉ chính thức chuyên hỗ trợ tư vấn và cung cấp các giải pháp bảo hiểm nhân thọ, bảo hiểm y tế phù hợp cho các khách hàng thu nhập cao và tổ chức kinh doanh tại lãnh thổ Việt Nam. Chúng tôi giúp quý khách hàng hiểu rõ khả năng sử dụng bảo hiểm nhân thọ và bảo hiểm y tế như những công cụ tài chính cho cá nhân, doanh nghiệp cho những mục đích khác nhau.
                     </p>
 
                 </div>
@@ -62,7 +62,7 @@ export function CalculatorCTA() {
 
 
 
-                        Bắt đầu tính toán
+                        Bắt đầu bài kiểm tra ngay
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
                  </div>
