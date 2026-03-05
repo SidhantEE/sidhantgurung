@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+gem "jekyll", "~> 3.9.0"
+gem "jekyll-github-metadata"
+gem "jekyll-seo-tag"
+gem "jekyll-theme-primer"
+gem "github-pages", group: :jekyll_plugins
