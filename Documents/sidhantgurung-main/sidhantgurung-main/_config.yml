@@ -1,0 +1,25 @@
+title: Sidhant Gurung
+description: Portfolio and personal website
+url: https://sidhantgurung.com
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+theme: null
+
+# Exclude from build
+exclude:
+  - .git
+  - .github
+  - check_it.py
+  - fix_html.py
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle
+  - vendor/cache
+  - vendor/gems
+  - vendor/ruby
+  - .DS_Store
+  - *.lock
+  - .claude
