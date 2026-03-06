@@ -1557,6 +1557,14 @@
           padding-left: 1.5rem;
           padding-right: 1.5rem;
         }
+        section {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .hero {
+          padding-top: 5rem;
+          padding-bottom: 2.5rem;
+        }
         .hero-layout {
           flex-direction: column;
         }
@@ -1565,6 +1573,12 @@
           height: 240px;
           align-self: center;
         }
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+        .hero-sub {
+          font-size: 1rem;
+        }
         .about-grid,
         .contact-grid {
           grid-template-columns: 1fr;
@@ -1572,16 +1586,94 @@
         .about-visual {
           display: none;
         }
+        .about-info h2 {
+          white-space: normal;
+          font-size: 1.5rem;
+        }
         .hero-stats {
-          gap: 2rem;
+          gap: 1.5rem;
           flex-wrap: wrap;
         }
         .project-grid {
           grid-template-columns: 1fr;
         }
+        .section-title {
+          white-space: normal;
+          font-size: clamp(1.4rem, 5vw, 2rem);
+        }
+        .section-desc {
+          white-space: normal;
+          font-size: 0.95rem;
+          margin-bottom: 1.5rem;
+        }
+        .awards-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .clubs-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .club-logo {
+          width: 60px;
+          height: 60px;
+        }
+        .interests-row {
+          gap: 0.8rem;
+        }
+        .interest-chip {
+          padding: 0.7rem 1.2rem;
+          font-size: 0.85rem;
+        }
+        .experience-grid {
+          grid-template-columns: 1fr;
+        }
+        .coursework-right {
+          padding-left: 0;
+        }
+        .contact-grid {
+          text-align: center;
+        }
+        .contact-form-area {
+          width: 100%;
+        }
         footer {
           flex-direction: column;
           gap: 1rem;
+          text-align: center;
+        }
+        .hero-actions {
+          flex-wrap: wrap;
+          gap: 0.8rem;
+        }
+        .btn {
+          font-size: 0.85rem;
+          padding: 0.7rem 1.4rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        section {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .hero {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+        .awards-grid {
+          grid-template-columns: 1fr;
+        }
+        .clubs-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .expertise-grid {
+          grid-template-columns: 1fr;
+        }
+        .stat-item {
           text-align: center;
         }
       }
