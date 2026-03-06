@@ -480,11 +480,12 @@
 
       .about-info h2 {
         font-family: var(--font-display);
-        font-size: 2.5rem;
+        font-size: clamp(1.6rem, 3vw, 2.5rem);
         margin-bottom: 1.5rem;
         letter-spacing: 0.02em;
         word-spacing: 0.12em;
         line-height: 1.4;
+        white-space: nowrap;
       }
 
       .about-info p {
@@ -1307,6 +1308,37 @@
       }
 
       /* ── Contact ── */
+      /* ── Toast Notification ── */
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: var(--accent);
+        color: var(--bg);
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        z-index: 9999;
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 10px 40px rgba(0, 229, 160, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .toast.error {
+        background: #ff4444;
+        box-shadow: 0 10px 40px rgba(255, 68, 68, 0.3);
+      }
+
       #contact {
         background: var(--bg-card);
         border-top: 1px solid var(--border);
@@ -1670,7 +1702,7 @@
       </p>
 
       <div class="project-grid">
-        <div class="project-card reveal">
+<div class="project-card reveal">
           <div class="project-banner banner-1">
             <span class="project-banner-text">HFA</span>
             <span class="project-status">In Progress</span>
@@ -1694,7 +1726,32 @@
           </div>
         </div>
 
-        <div class="project-card reveal">
+<div class="project-card reveal">
+          <div
+            class="project-banner"
+            style="background: linear-gradient(135deg, #1a1a0d, #2e2e0d)"
+          >
+            <span class="project-banner-text">AI HRT</span>
+            <span class="project-status">In Progress</span>
+          </div>
+          <div class="project-body">
+            <h3>AI Heart Rate Tracker</h3>
+            <div class="project-role">Personal Project</div>
+            <p>
+              Designing a wearable biometric system integrating PPG heart rate
+              and GSR sensors with ESP32 for stress detection. Features analog
+              signal conditioning, 16-bit ADC, and wireless data transmission.
+            </p>
+            <div class="card-tools">
+              <span class="tool-tag">ESP32</span>
+              <span class="tool-tag">Sensors</span>
+              <span class="tool-tag">C++</span>
+              <span class="tool-tag">ADC</span>
+            </div>
+          </div>
+        </div>
+
+<div class="project-card reveal">
           <div class="project-banner banner-2" style="height: auto; padding: 0">
             <div
               style="
@@ -1746,32 +1803,7 @@
           </div>
         </div>
 
-        <div class="project-card reveal">
-          <div
-            class="project-banner"
-            style="background: linear-gradient(135deg, #1a1a0d, #2e2e0d)"
-          >
-            <span class="project-banner-text">AI HRT</span>
-            <span class="project-status">In Progress</span>
-          </div>
-          <div class="project-body">
-            <h3>AI Heart Rate Tracker</h3>
-            <div class="project-role">Personal Project</div>
-            <p>
-              Designing a wearable biometric system integrating PPG heart rate
-              and GSR sensors with ESP32 for stress detection. Features analog
-              signal conditioning, 16-bit ADC, and wireless data transmission.
-            </p>
-            <div class="card-tools">
-              <span class="tool-tag">ESP32</span>
-              <span class="tool-tag">Sensors</span>
-              <span class="tool-tag">C++</span>
-              <span class="tool-tag">ADC</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal">
+<div class="project-card reveal">
           <div class="project-banner banner-3">
             <div class="project-carousel" data-index="0">
               <div class="carousel-track">
@@ -1813,8 +1845,7 @@
               <span class="tool-tag">Microcontroller</span>
             </div>
           </div>
-        </div>
-      </div>
+        </div></div>
     </section>
 
     <!-- ═══════ EXPERTISE ═══════ -->
@@ -1974,37 +2005,30 @@
 
           <div class="course-list-right">
             <div class="course-item-right reveal">
-              <span class="course-deco">/// 01</span>
               <span class="course-code">EE 5379</span>
               <span class="course-name">Power System Stability & Control</span>
             </div>
             <div class="course-item-right reveal">
-              <span class="course-deco">/// 02</span>
               <span class="course-code">EE 3240</span>
               <span class="course-name">Junior Design Laboratory</span>
             </div>
             <div class="course-item-right reveal">
-              <span class="course-deco">/// 03</span>
               <span class="course-code">EE 3346</span>
               <span class="course-name">Circuit Analysis II</span>
             </div>
             <div class="course-item-right reveal">
-              <span class="course-deco">/// 04</span>
               <span class="course-code">EE 3314</span>
               <span class="course-name">Microcontrollers & Embedded Systems</span>
             </div>
             <div class="course-item-right reveal">
-              <span class="course-deco">/// 05</span>
               <span class="course-code">EE 3318</span>
               <span class="course-name">Analog & Digital Signal Processing</span>
             </div>
             <div class="course-item-right reveal">
-              <span class="course-deco">/// 06</span>
               <span class="course-code">EE 3407</span>
               <span class="course-name">Electromagnetic Fields</span>
             </div>
             <div class="course-item-right reveal">
-              <span class="course-deco">/// 07</span>
               <span class="course-code">EE 3330</span>
               <span class="course-name">Electronics II</span>
             </div>
@@ -2208,85 +2232,43 @@
 
     <!-- ═══════ CONTACT ═══════ -->
     <section id="contact">
-      <div style="text-align: center; max-width: 600px; margin: 0 auto">
-        <p class="section-label reveal">// Let's Connect</p>
-        <h2 class="section-title reveal" style="text-align: center"> I'm always open to new opportunities and collaborations! </h2>
-        <p class="section-desc reveal" style="text-align: center">
-          I'm actively seeking Summer 2026 internship opportunities in power
-          systems, embedded design, and hardware engineering. Let's talk.
-        </p>
+      <div class="contact-grid">
+        <div>
+          <p class="section-label reveal">// Let's Connect</p>
+          <h2 class="section-title reveal">I'm always open to new opportunities and collaborations!</h2>
+          <p class="section-desc reveal">
+            I'm actively seeking Summer 2026 internship opportunities in power systems, embedded design, and hardware engineering. Let's talk.
+          </p>
 
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.2rem;
-            margin-top: 2rem;
-          "
-        >
-          <a
-            href="mailto:sidhant.gurung@outlook.com"
-            class="btn btn-primary reveal"
-            style="
-              display: inline-flex;
-              align-items: center;
-              gap: 0.6rem;
-              font-size: 1.05rem;
-              padding: 1rem 2.2rem;
-            "
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-              />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            Send me an Email
-          </a>
+          <div style="margin-top:1.5rem;">
+            <a href="https://linkedin.com/in/sidhantgurung" target="_blank" class="btn btn-ghost reveal" style="display:inline-flex; align-items:center; gap:0.6rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              Connect on LinkedIn
+            </a>
+          </div>
+        </div>
 
-          <a
-            href="https://linkedin.com/in/sidhantgurung"
-            target="_blank"
-            class="btn btn-ghost reveal"
-            style="
-              display: inline-flex;
-              align-items: center;
-              gap: 0.6rem;
-              font-size: 1.05rem;
-              padding: 1rem 2.2rem;
-            "
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"
-              />
-              <rect x="2" y="9" width="4" height="12" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
-            Connect on LinkedIn
-          </a>
+        <div class="contact-form-area reveal">
+          <h3>Send a message</h3>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="contact-name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="contact-email" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="contact-message" placeholder="What's on your mind?"></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; margin-top:0.5rem;" onclick="sendMessage()">Send Message →</button>
         </div>
       </div>
     </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <!-- ═══════ FOOTER ═══════ -->
     <footer>
@@ -2299,7 +2281,7 @@
     </footer>
 
     <!-- ═══════ SCRIPTS ═══════ -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
       // Scroll reveal
       const observer = new IntersectionObserver(
         (entries) => {
@@ -2392,6 +2374,64 @@
         carousel.dataset.index = index;
         track.style.transform = "translateX(-" + index * 100 + "%)";
         dots.forEach((d, i) => d.classList.toggle("active", i === index));
+      }
+
+      // Toast notification
+      function showToast(message, isError) {
+        const toast = document.getElementById("toast");
+        toast.textContent = (isError ? "\u2716 " : "\u2714 ") + message;
+        toast.className = "toast show" + (isError ? " error" : "");
+        setTimeout(() => { toast.className = "toast"; }, 3500);
+      }
+
+      // Send message via Resend API
+      async function sendMessage() {
+        const name = document.getElementById("contact-name");
+        const email = document.getElementById("contact-email");
+        const message = document.getElementById("contact-message");
+
+        if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+          showToast("Please fill in all fields", true);
+          return;
+        }
+
+        const btn = document.querySelector(".contact-form-area .btn");
+        btn.textContent = "Sending...";
+        btn.style.opacity = "0.7";
+        btn.style.pointerEvents = "none";
+
+        try {
+          const response = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              "Authorization": "Bearer re_SHEkQtzc_Cbj9K8LBCf9s18tuqhVMtxtk",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              from: "Portfolio Contact <onboarding@resend.dev>",
+              to: ["sidhant.gurung@outlook.com"],
+              subject: "Portfolio Message from " + name.value.trim(),
+              html: "<p><strong>Name:</strong> " + name.value.trim() + "</p>" +
+                    "<p><strong>Email:</strong> " + email.value.trim() + "</p>" +
+                    "<p><strong>Message:</strong></p><p>" + message.value.trim() + "</p>"
+            })
+          });
+
+          if (response.ok) {
+            showToast("Message sent! I'll get back to you soon.");
+            name.value = "";
+            email.value = "";
+            message.value = "";
+          } else {
+            showToast("Failed to send. Please try again.", true);
+          }
+        } catch (error) {
+          showToast("Failed to send. Please try again.", true);
+        }
+
+        btn.innerHTML = "Send Message →";
+        btn.style.opacity = "1";
+        btn.style.pointerEvents = "auto";
       }
     </script>
   </body>
