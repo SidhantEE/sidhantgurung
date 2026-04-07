@@ -1712,7 +1712,7 @@
         <div class="hero-content">
           <div class="hero-badge">
             <span class="dot"></span>
-            Open to Summer 2026 / Fall 2026 Internships
+            Fall 2026 Co-Ops
           </div>
 
           <h1>Sidhant Gurung</h1>
@@ -1799,8 +1799,31 @@
 
       <div class="project-grid">
 <div class="project-card reveal">
-          <div class="project-banner banner-1">
-            <span class="project-banner-text">HFA</span>
+          <div class="project-banner banner-1" style="height: auto; padding: 0;">
+            <div class="project-carousel" data-index="0">
+              <div class="carousel-track">
+                <div style="min-width:100%;height:300px;background:#0d0d12;display:flex;align-items:center;justify-content:center;">
+                  <img src="hfa-pcb-3d.png" alt="HFA PCB 3D Render" style="max-width:100%;max-height:100%;object-fit:contain;padding:8px;">
+                </div>
+                <div style="min-width:100%;height:300px;background:#0d0d12;display:flex;align-items:center;justify-content:center;">
+                  <img src="hfa-pcb-layout.png" alt="HFA PCB Layout" style="max-width:100%;max-height:100%;object-fit:contain;padding:8px;">
+                </div>
+                <div style="min-width:100%;height:300px;background:#0d0d12;display:flex;align-items:center;justify-content:center;">
+                  <video src="hfa-video-1.mp4" controls style="max-width:100%;max-height:100%;border-radius:4px;" preload="metadata"></video>
+                </div>
+                <div style="min-width:100%;height:300px;background:#0d0d12;display:flex;align-items:center;justify-content:center;">
+                  <video src="hfa-video-2.mp4" controls style="max-width:100%;max-height:100%;border-radius:4px;" preload="metadata"></video>
+                </div>
+              </div>
+              <button class="carousel-btn prev" onclick="moveCarousel(this, -1)">&#8249;</button>
+              <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#8250;</button>
+              <div class="carousel-dots">
+                <span class="carousel-dot active" onclick="goToSlide(this, 0)"></span>
+                <span class="carousel-dot" onclick="goToSlide(this, 1)"></span>
+                <span class="carousel-dot" onclick="goToSlide(this, 2)"></span>
+                <span class="carousel-dot" onclick="goToSlide(this, 3)"></span>
+              </div>
+            </div>
             <span class="project-status">In Progress</span>
           </div>
           <div class="project-body">
@@ -2042,10 +2065,10 @@
           <div class="timeline-item reveal">
             <div class="timeline-dot"></div>
             <div class="timeline-date">Summer 2026</div>
-            <div class="timeline-title">Incoming Electrical Engineering Intern</div>
-            <div class="timeline-org">The Haskell Company</div>
+            <div class="timeline-title">Applications Engineering Intern</div>
+            <div class="timeline-org">Qorvo</div>
             <div class="timeline-desc">
-              Incoming summer intern for building electrical design and engineering.
+              Incoming summer intern in applications engineering.
             </div>
           </div>
 
