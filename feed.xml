@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sidhant Gurung — lab notes</title>
+    <link>https://sidhantgurung.me/</link>
+    <atom:link href="https://sidhantgurung.me/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Lab notes, writeups, and debugging stories from Sidhant Gurung — EE undergrad at UT Arlington working on hardware, RF, and embedded systems.</description>
+    <language>en-us</language>
+    <managingEditor>sidhant@sidhantgurung.me (Sidhant Gurung)</managingEditor>
+    <lastBuildDate>Sun, 19 Apr 2026 18:00:00 -0500</lastBuildDate>
+    <generator>hand-crafted with care</generator>
+
+    <item>
+      <title>Switching the HFA motor driver from BS170 to 2N2222</title>
+      <link>https://sidhantgurung.me/#blog/hfa-motor-driver</link>
+      <guid isPermaLink="false">sidhantgurung.me/blog/hfa-motor-driver-2026-04</guid>
+      <pubDate>Sat, 12 Apr 2026 14:30:00 -0500</pubDate>
+      <description>The BS170 MOSFET I originally spec'd for the haptic motor driver on the HFA board kept getting warm under sustained PWM. After a few hours on the bench measuring Vgs thresholds and on-resistance across duty cycles, I switched to a 2N2222 NPN BJT and the thermals settled. Full writeup with scope traces and the decision criteria I used.</description>
+    </item>
+
+    <item>
+      <title>Qorvo interview prep: what I actually studied for RF fundamentals</title>
+      <link>https://sidhantgurung.me/#blog/qorvo-rf-prep</link>
+      <guid isPermaLink="false">sidhantgurung.me/blog/qorvo-rf-prep-2026-03</guid>
+      <pubDate>Mon, 24 Mar 2026 09:00:00 -0500</pubDate>
+      <description>Going into the Qorvo Applications Engineering final round, I had maybe 60% of the RF fundamentals I needed and zero practice talking about them out loud. Here's the study plan I built, the resources that actually moved the needle (hint: not YouTube), and the two Smith chart problems that showed up in the interview.</description>
+    </item>
+
+  </channel>
+</rss>
