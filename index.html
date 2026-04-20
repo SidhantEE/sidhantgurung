@@ -10,9 +10,9 @@
 <style>
   :root {
     --bg: #0a0a0f;
-    --fg: #d4d4d4;
-    --muted: #6a7a72;
-    --dim: #3d5d4d;
+    --fg: #e0e0e0;
+    --muted: #7a8a82;
+    --dim: #4a6a5d;
     --accent: #00e5a0;
     --warn: #ffbd2e;
     --danger: #ff5f56;
@@ -28,26 +28,31 @@
     background: #1a1a22;
     min-height: 100vh;
     font-family: 'SF Mono', 'JetBrains Mono', 'Menlo', 'Consolas', ui-monospace, monospace;
-    font-size: 14px;
+    font-size: 15px;   /* BUMPED 14 → 15 */
     color: var(--fg);
   }
 
   body {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;      /* let terminal fill vertically */
     justify-content: center;
-    padding: 24px 16px;
+    padding: 20px 16px;
+    min-height: 100vh;
   }
 
+  /* Terminal now fills viewport height too — no more short pages */
   .terminal {
     position: relative;
     width: 100%;
-    max-width: 1280px;
+    max-width: 1320px;          /* wider */
     background: var(--bg);
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid #2a2a35;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 40px);
   }
 
   .terminal::before {
@@ -67,13 +72,14 @@
 
   .title-bar {
     background: var(--header);
-    padding: 10px 14px;
+    padding: 11px 16px;
     display: flex;
     align-items: center;
     gap: 8px;
     border-bottom: 1px solid #23232e;
     position: relative;
     z-index: 2;
+    flex-shrink: 0;
   }
   .dot { width: 12px; height: 12px; border-radius: 50%; }
   .dot.red { background: var(--danger); }
@@ -82,11 +88,11 @@
   .title-text {
     flex: 1;
     text-align: center;
-    font-size: 12px;
-    color: #7a7a8a;
+    font-size: 13px;
+    color: #8a8a9a;
     user-select: none;
   }
-  .title-text .live { color: var(--muted); font-size: 11px; margin-left: 8px; }
+  .title-text .live { color: var(--muted); font-size: 12px; margin-left: 8px; }
   .title-text .pulse {
     display: inline-block;
     width: 6px; height: 6px;
@@ -101,21 +107,22 @@
     50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(0, 229, 160, 0); }
   }
 
-  /* No more forced min-height; let content dictate */
+  /* SCREEN — flex column, content grows, tabs+footer stick to bottom */
   .screen {
-    padding: 14px 20px 16px;
+    padding: 16px 24px 20px;
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 2;
+    flex: 1;   /* fill available vertical space */
   }
 
   .boot-screen {
-    padding: 16px 20px;
-    font-size: 12px;
+    padding: 20px 24px;
+    font-size: 13px;
     line-height: 1.7;
     color: var(--accent);
-    min-height: 600px;
+    flex: 1;
   }
   .boot-screen .ok { color: var(--muted); }
   .boot-screen .dim { color: #8a9a92; }
@@ -123,7 +130,7 @@
 
   .prompt-log {
     color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.6;
     margin-bottom: 14px;
   }
@@ -134,7 +141,7 @@
   .typed-cmd { color: var(--fg); display: inline-block; }
   .cursor-inline {
     display: inline-block;
-    width: 8px; height: 14px;
+    width: 8px; height: 15px;
     background: var(--fg);
     vertical-align: text-bottom;
     animation: blink 1.1s steps(2) infinite;
@@ -142,148 +149,153 @@
   }
   @keyframes blink { 50% { opacity: 0; } }
 
-  /* motd is ONLY shown on the home section now */
   .motd {
     color: var(--dim);
-    font-size: 12px;
+    font-size: 13px;
     font-style: italic;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
     padding-left: 12px;
     border-left: 2px solid var(--border);
     line-height: 1.6;
-    max-width: 700px;
+    max-width: 760px;
   }
   .motd .quote-by { color: var(--muted); font-style: normal; }
 
   .main-grid {
     display: grid;
-    grid-template-columns: minmax(380px, 520px) 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(420px, 560px) 1fr;
+    gap: 44px;
+    flex: 1;
   }
 
-  .portrait-col { display: flex; flex-direction: column; gap: 14px; }
+  .portrait-col { display: flex; flex-direction: column; gap: 16px; }
 
+  /* B&W portrait — white on dark instead of accent green */
   .ascii-portrait {
-    color: var(--accent);
-    font-size: 7px;
+    color: #e8e8e8;
+    font-size: 8px;
     line-height: 1;
     white-space: pre;
     letter-spacing: 0;
     user-select: none;
-    opacity: 0.95;
+    opacity: 0.92;
     margin: 0;
     font-family: inherit;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
   }
 
   .sysinfo {
-    font-size: 11px;
-    line-height: 1.55;
+    font-size: 12px;
+    line-height: 1.6;
     color: var(--fg);
-    padding: 10px 12px;
+    padding: 12px 14px;
     border: 1px solid var(--border);
     border-radius: 3px;
     background: rgba(0, 229, 160, 0.02);
-    max-width: 340px;
+    max-width: 380px;
   }
-  .sysinfo .k { color: var(--accent); display: inline-block; min-width: 70px; }
+  .sysinfo .k { color: var(--accent); display: inline-block; min-width: 75px; }
   .sysinfo .v { color: var(--fg); }
-  .sysinfo .divider { color: var(--dim); letter-spacing: 1px; margin: 4px 0; }
-  .sysinfo .color-bar { display: flex; gap: 2px; margin-top: 6px; }
-  .sysinfo .color-bar span { width: 14px; height: 10px; display: inline-block; }
+  .sysinfo .divider { color: var(--dim); letter-spacing: 1px; margin: 5px 0; }
+  .sysinfo .color-bar { display: flex; gap: 2px; margin-top: 8px; }
+  .sysinfo .color-bar span { width: 15px; height: 11px; display: inline-block; }
 
-  .content-col { display: flex; flex-direction: column; }
+  .content-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 
   .brand {
     color: var(--accent);
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1;
     white-space: pre;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     user-select: none;
   }
 
   .intro {
     color: var(--fg);
-    line-height: 1.7;
-    font-size: 13px;
-    max-width: 620px;
+    line-height: 1.75;
+    font-size: 14px;
+    max-width: 680px;
   }
-  .intro p { margin: 0 0 14px; }
+  .intro p { margin: 0 0 16px; }
   .intro p.dim { color: var(--muted); }
   .intro .accent { color: var(--accent); }
 
   .now-playing {
-    margin-top: 18px;
-    padding: 8px 12px;
+    margin-top: 20px;
+    padding: 10px 14px;
     border: 1px dashed var(--border);
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
     background: rgba(0, 229, 160, 0.02);
-    max-width: 620px;
+    max-width: 680px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
   .now-playing .label {
     color: var(--accent);
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 1px 5px;
+    padding: 2px 6px;
     border: 1px solid var(--border);
     border-radius: 2px;
     flex-shrink: 0;
   }
   .now-playing .text { color: var(--fg); }
 
-  /* 2-col stats instead of 4 */
   .quick-stats {
-    margin-top: 18px;
-    max-width: 620px;
+    margin-top: 20px;
+    max-width: 680px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
   }
   .stat-card {
-    padding: 14px 18px;
+    padding: 16px 20px;
     border: 1px solid var(--border);
     border-radius: 3px;
     background: rgba(0, 229, 160, 0.02);
   }
   .stat-card .num {
     color: var(--accent);
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 500;
     line-height: 1.1;
     display: block;
   }
   .stat-card .lbl {
     color: var(--muted);
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 4px;
+    margin-top: 6px;
   }
 
   .orgs-strip {
-    margin-top: 14px;
-    max-width: 620px;
+    margin-top: 16px;
+    max-width: 680px;
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     align-items: center;
   }
   .orgs-strip .tag {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--warn);
-    padding: 2px 8px;
+    padding: 3px 10px;
     border: 1px solid var(--border);
     border-radius: 2px;
     background: rgba(255, 189, 46, 0.05);
   }
   .orgs-strip .tag-label {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -292,10 +304,10 @@
 
   .tabs {
     display: flex;
-    gap: 26px;
-    margin-top: 22px;
-    padding-top: 4px;
-    font-size: 13px;
+    gap: 28px;
+    margin-top: auto;   /* stick tabs to bottom of flex column */
+    padding-top: 24px;
+    font-size: 14px;
     flex-wrap: wrap;
   }
   .tab {
@@ -307,7 +319,7 @@
     background: none;
     border: none;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 14px;
     padding: 0 0 2px;
   }
   .tab:hover { color: var(--accent); }
@@ -315,20 +327,19 @@
   .tab.active::before { content: '+ '; color: var(--accent); }
   .tab:not(.active)::before { content: '  '; white-space: pre; }
 
-  /* footer trail — appears at end of each section */
   .section-footer {
-    margin-top: 22px;
-    font-size: 11px;
+    margin-top: 24px;
+    font-size: 12px;
     color: var(--dim);
     padding-left: 12px;
     border-left: 2px solid var(--border);
-    max-width: 680px;
+    max-width: 760px;
   }
 
   .footer-bar {
-    padding: 10px 20px 14px;
+    padding: 12px 24px 14px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
     border-top: 1px dashed #1f2128;
     display: flex;
     justify-content: space-between;
@@ -336,36 +347,49 @@
     position: relative;
     z-index: 2;
     gap: 10px;
+    flex-shrink: 0;
   }
   .footer-bar .keys { color: var(--muted); }
-  .footer-bar .keys kbd { color: var(--fg); font-family: inherit; font-size: 12px; padding: 0 2px; }
+  .footer-bar .keys kbd { color: var(--fg); font-family: inherit; font-size: 13px; padding: 0 2px; }
   .footer-bar .right { color: var(--dim); display: flex; gap: 12px; align-items: center; }
   .footer-bar .right .sep { color: var(--border); }
   .footer-bar .right .loc { color: var(--muted); }
   .footer-bar .right a { color: var(--muted); text-decoration: none; }
   .footer-bar .right a:hover { color: var(--accent); }
 
-  .section { display: none; }
-  .section.active { display: block; animation: fade-in 0.18s ease-out; }
+  /* SECTION is a flex column that fills — so tabs go to bottom */
+  .section {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+  }
+  .section.active { display: flex; animation: fade-in 0.18s ease-out; }
   @keyframes fade-in {
     from { opacity: 0; transform: translateY(2px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* Content wrapper inside each section — pushes tabs to bottom */
+  .section-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
   .section-head {
     color: var(--accent);
-    font-size: 13px;
-    margin: 0 0 14px;
+    font-size: 14px;
+    margin: 0 0 16px;
     letter-spacing: 0.5px;
   }
   .section-head .count {
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     margin-left: 8px;
   }
 
   .proj {
-    padding: 10px 12px;
+    padding: 12px 14px;
     border: 1px solid transparent;
     border-radius: 3px;
     border-bottom: 1px dashed #1f2128;
@@ -378,23 +402,23 @@
     border-color: var(--border);
   }
   .proj.focused { border-color: var(--accent); }
-  .proj-title { color: var(--accent); font-size: 13px; margin-bottom: 3px; }
+  .proj-title { color: var(--accent); font-size: 14px; margin-bottom: 4px; }
   .proj-title::after {
     content: ' ↗';
     color: var(--muted);
-    font-size: 10px;
+    font-size: 11px;
     opacity: 0;
     transition: opacity 0.15s;
   }
   .proj:hover .proj-title::after, .proj.focused .proj-title::after { opacity: 1; }
-  .proj-meta { color: var(--muted); font-size: 11px; margin-bottom: 6px; }
-  .proj-desc { color: var(--fg); font-size: 13px; line-height: 1.65; max-width: 620px; }
+  .proj-meta { color: var(--muted); font-size: 12px; margin-bottom: 8px; }
+  .proj-desc { color: var(--fg); font-size: 14px; line-height: 1.65; max-width: 680px; }
 
   .chip {
     display: inline-block;
-    padding: 0px 7px;
+    padding: 1px 8px;
     margin: 6px 4px 0 0;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--accent);
     border: 1px solid var(--border);
     border-radius: 2px;
@@ -402,41 +426,40 @@
   }
 
   .tl-entry {
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     padding-left: 14px;
     border-left: 2px solid var(--border);
   }
-  .tl-date { color: var(--warn); font-size: 11px; }
-  .tl-role { color: var(--accent); font-size: 13px; margin-top: 2px; }
-  .tl-org { color: var(--fg); font-size: 12px; }
-  .tl-desc { color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.6; max-width: 620px; }
+  .tl-date { color: var(--warn); font-size: 12px; }
+  .tl-role { color: var(--accent); font-size: 14px; margin-top: 3px; }
+  .tl-org { color: var(--fg); font-size: 13px; }
+  .tl-desc { color: var(--muted); font-size: 13px; margin-top: 4px; line-height: 1.65; max-width: 680px; }
 
-  /* section-level 2-col layout for Experience & Education (fills dead space) */
   .section-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 36px;
+    gap: 40px;
     align-items: start;
   }
   .section-grid .side-panel {
-    padding: 12px 14px;
+    padding: 14px 16px;
     border: 1px solid var(--border);
     border-radius: 3px;
     background: rgba(0, 229, 160, 0.02);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--fg);
-    line-height: 1.7;
+    line-height: 1.8;
   }
   .section-grid .side-panel .ph {
     color: var(--accent);
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 8px;
   }
   .section-grid .side-panel .pi {
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     margin-top: 2px;
   }
   @media (max-width: 980px) {
@@ -445,13 +468,13 @@
 
   .skill-row {
     display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 14px;
-    margin-bottom: 12px;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
     align-items: start;
   }
-  .skill-cat { color: var(--warn); font-size: 12px; }
-  .skill-desc { font-size: 12px; color: var(--fg); line-height: 1.6; max-width: 520px; }
+  .skill-cat { color: var(--warn); font-size: 13px; }
+  .skill-desc { font-size: 13px; color: var(--fg); line-height: 1.65; max-width: 580px; }
 
   .link {
     color: var(--accent);
@@ -460,22 +483,21 @@
   }
   .link:hover { border-bottom-color: var(--accent); }
 
-  .kv { margin: 2px 0; font-size: 13px; }
-  .kv .k { color: var(--muted); display: inline-block; min-width: 72px; }
+  .kv { margin: 3px 0; font-size: 14px; }
+  .kv .k { color: var(--muted); display: inline-block; min-width: 78px; }
   .kv .v { color: var(--fg); }
 
   .cursor {
     display: inline-block;
-    width: 8px; height: 14px;
+    width: 8px; height: 15px;
     background: var(--accent);
     vertical-align: middle;
     animation: blink 1.1s steps(2) infinite;
     margin-left: 2px;
   }
 
-  /* Blog */
   .blog-post {
-    padding: 14px 16px;
+    padding: 16px 18px;
     margin-bottom: 14px;
     border: 1px solid var(--border);
     border-radius: 3px;
@@ -487,12 +509,12 @@
     background: rgba(0, 229, 160, 0.05);
     border-color: var(--accent);
   }
-  .blog-post .date { color: var(--warn); font-size: 11px; font-family: inherit; }
-  .blog-post .title { color: var(--accent); font-size: 14px; margin: 4px 0 6px; }
-  .blog-post .excerpt { color: var(--fg); font-size: 12px; line-height: 1.6; max-width: 680px; }
-  .blog-post .read-more { color: var(--muted); font-size: 11px; margin-top: 8px; }
+  .blog-post .date { color: var(--warn); font-size: 12px; }
+  .blog-post .title { color: var(--accent); font-size: 15px; margin: 4px 0 6px; }
+  .blog-post .excerpt { color: var(--fg); font-size: 13px; line-height: 1.65; max-width: 760px; }
+  .blog-post .read-more { color: var(--muted); font-size: 12px; margin-top: 10px; }
 
-  .feed-link { margin-top: 18px; font-size: 12px; color: var(--muted); }
+  .feed-link { margin-top: 20px; font-size: 13px; color: var(--muted); }
   .feed-link a {
     color: var(--accent);
     text-decoration: none;
@@ -500,37 +522,37 @@
   }
   .feed-link a:hover { border-bottom-color: var(--accent); }
 
-  /* Contact */
   .contact-grid {
     display: grid;
-    grid-template-columns: minmax(220px, 280px) 1fr;
-    gap: 24px;
-    max-width: 1000px;
+    grid-template-columns: minmax(260px, 320px) 1fr;
+    gap: 28px;
+    max-width: 1100px;
     align-items: start;
   }
   .contact-card {
     background: rgba(255,255,255,0.015);
     border: 1px solid #1f2128;
     border-radius: 4px;
-    padding: 12px 14px;
+    padding: 14px 16px;
   }
   .contact-card .hdr {
     color: var(--accent);
-    font-size: 10px;
-    margin-bottom: 8px;
+    font-size: 11px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  .contact-card .kv { margin: 2px 0; font-size: 12px; }
-  .contact-card .kv .k { min-width: 60px; }
+  .contact-card .kv { margin: 3px 0; font-size: 13px; }
+  .contact-card .kv .k { min-width: 68px; }
+
   .contact-form {
-    padding: 16px 18px;
+    padding: 18px 20px;
     border: 1px solid var(--border);
     border-radius: 3px;
     background: rgba(0, 229, 160, 0.02);
   }
-  .form-line { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; font-size: 13px; }
-  .form-line label { color: var(--accent); min-width: 90px; flex-shrink: 0; }
+  .form-line { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; font-size: 14px; }
+  .form-line label { color: var(--accent); min-width: 100px; flex-shrink: 0; }
   .form-line .prompt-char { color: var(--warn); }
   .form-input, .form-textarea {
     flex: 1;
@@ -539,40 +561,39 @@
     outline: none;
     color: var(--fg);
     font-family: inherit;
-    font-size: 13px;
-    padding: 2px 4px;
+    font-size: 14px;
+    padding: 3px 4px;
     border-bottom: 1px dashed var(--border);
     caret-color: var(--accent);
   }
   .form-textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 90px;
     border: 1px dashed var(--border);
     border-radius: 2px;
-    padding: 6px 8px;
-    line-height: 1.5;
+    padding: 8px 10px;
+    line-height: 1.55;
     width: 100%;
   }
   .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
   .form-submit {
-    margin-top: 12px;
+    margin-top: 14px;
     background: transparent;
     color: var(--accent);
     border: 1px solid var(--border);
-    padding: 6px 14px;
+    padding: 8px 16px;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 2px;
     transition: background 0.15s, border-color 0.15s;
   }
   .form-submit:hover { background: rgba(0, 229, 160, 0.1); border-color: var(--accent); }
   .form-submit:disabled { color: var(--muted); cursor: not-allowed; }
-  .form-status { margin-top: 10px; font-size: 12px; color: var(--muted); min-height: 16px; }
+  .form-status { margin-top: 12px; font-size: 13px; color: var(--muted); min-height: 18px; }
   .form-status.ok { color: var(--accent); }
   .form-status.err { color: var(--danger); }
 
-  /* Modal */
   .modal-overlay {
     display: none;
     position: fixed;
@@ -589,7 +610,7 @@
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 6px;
-    max-width: 820px;
+    max-width: 860px;
     width: 100%;
     max-height: 90vh;
     overflow: hidden;
@@ -599,49 +620,49 @@
     box-shadow: 0 10px 50px rgba(0, 229, 160, 0.08);
   }
   .modal-header {
-    padding: 10px 14px;
+    padding: 11px 16px;
     background: var(--header);
     border-bottom: 1px solid #23232e;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 12px;
+    font-size: 13px;
   }
-  .modal-header .title { flex: 1; color: #7a7a8a; text-align: center; }
+  .modal-header .title { flex: 1; color: #8a8a9a; text-align: center; }
   .modal-header .close {
     cursor: pointer;
     color: var(--muted);
-    padding: 2px 6px;
+    padding: 2px 8px;
     border-radius: 2px;
     background: none;
     border: none;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 13px;
   }
   .modal-header .close:hover { color: var(--danger); }
-  .modal-body { padding: 20px 24px; overflow-y: auto; flex: 1; }
-  .modal-title { color: var(--accent); font-size: 16px; margin: 0 0 4px; }
-  .modal-meta { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
-  .modal-desc { color: var(--fg); font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
-  .modal-desc p { margin: 0 0 12px; }
+  .modal-body { padding: 24px 28px; overflow-y: auto; flex: 1; }
+  .modal-title { color: var(--accent); font-size: 18px; margin: 0 0 5px; }
+  .modal-meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+  .modal-desc { color: var(--fg); font-size: 14px; line-height: 1.75; margin-bottom: 16px; }
+  .modal-desc p { margin: 0 0 14px; }
   .modal-desc h3 {
     color: var(--warn);
-    font-size: 13px;
-    margin: 16px 0 8px;
+    font-size: 14px;
+    margin: 18px 0 10px;
     font-weight: 500;
   }
   .modal-desc code {
     background: rgba(0, 229, 160, 0.08);
     color: var(--accent);
-    padding: 1px 5px;
+    padding: 1px 6px;
     border-radius: 2px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .modal-media {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 12px;
+    margin-bottom: 18px;
   }
   .modal-media .media-slot {
     aspect-ratio: 16 / 10;
@@ -652,7 +673,7 @@
     align-items: center;
     justify-content: center;
     color: var(--dim);
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
     padding: 12px;
     position: relative;
@@ -663,39 +684,40 @@
   .modal-media .placeholder-icon {
     font-family: inherit;
     color: var(--accent);
-    font-size: 22px;
+    font-size: 24px;
     margin-bottom: 4px;
     opacity: 0.4;
   }
   .modal-section-head {
     color: var(--warn);
-    font-size: 12px;
-    margin: 14px 0 6px;
+    font-size: 13px;
+    margin: 16px 0 8px;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
 
   @media (max-width: 980px) {
     .contact-grid { grid-template-columns: 1fr; }
-    .main-grid { grid-template-columns: 1fr; gap: 20px; }
+    .main-grid { grid-template-columns: 1fr; gap: 24px; }
     .portrait-col { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
-    .ascii-portrait { font-size: 5.5px; }
+    .ascii-portrait { font-size: 6px; }
   }
   @media (max-width: 820px) {
-    .sysinfo { font-size: 10px; }
+    .sysinfo { font-size: 11px; }
     .skill-row { grid-template-columns: 1fr; gap: 4px; }
     .title-text .live { display: none; }
     .modal-media { grid-template-columns: 1fr; }
     .form-line { flex-direction: column; gap: 4px; align-items: stretch; }
     .form-line label { min-width: 0; }
     .quick-stats { grid-template-columns: 1fr; }
+    .terminal { min-height: auto; }
   }
   @media (max-width: 480px) {
     body { padding: 8px; }
-    .screen { padding: 12px 14px 14px; }
-    .footer-bar { padding: 10px 14px; font-size: 11px; flex-direction: column; gap: 4px; align-items: flex-start; }
+    .screen { padding: 14px 16px 16px; }
+    .footer-bar { padding: 10px 14px; font-size: 12px; flex-direction: column; gap: 4px; align-items: flex-start; }
     .portrait-col { flex-direction: column; }
-    .ascii-portrait { font-size: 4.5px; }
+    .ascii-portrait { font-size: 5px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .cursor, .cursor-inline, .pulse { animation: none; }
@@ -733,301 +755,312 @@
 
     <!-- HOME -->
     <div id="home" class="section active">
-      <!-- motd lives INSIDE home now, so it doesn't follow to other pages -->
-      <div class="motd" id="motd"></div>
+      <div class="section-content">
+        <div class="motd" id="motd"></div>
 
-      <div class="main-grid">
+        <div class="main-grid">
 
-        <div class="portrait-col">
-          <pre class="ascii-portrait" id="portrait"></pre>
+          <div class="portrait-col">
+            <pre class="ascii-portrait" id="portrait"></pre>
 
-          <div class="sysinfo">
-            <div><span class="k">OS</span><span class="v">UT Arlington 4.0 LTS</span></div>
-            <div><span class="k">Host</span><span class="v">EE undergrad, BS '27</span></div>
-            <div><span class="k">GPA</span><span class="v">3.68 / 4.00</span></div>
-            <div><span class="k">Memory</span><span class="v">∞ curiosity</span></div>
-            <div><span class="k">Location</span><span class="v">Arlington, TX</span></div>
-            <div class="divider">────────────────────────</div>
-            <div class="color-bar">
-              <span style="background:#1a3a2e;"></span>
-              <span style="background:#00e5a0;"></span>
-              <span style="background:#ffbd2e;"></span>
-              <span style="background:#5dcaa5;"></span>
-              <span style="background:#ff5f56;"></span>
-              <span style="background:#d4d4d4;"></span>
-              <span style="background:#6a7a72;"></span>
-              <span style="background:#3d5d4d;"></span>
+            <div class="sysinfo">
+              <div><span class="k">OS</span><span class="v">UT Arlington 4.0 LTS</span></div>
+              <div><span class="k">Host</span><span class="v">EE undergrad, BS '27</span></div>
+              <div><span class="k">GPA</span><span class="v">3.68 / 4.00</span></div>
+              <div><span class="k">Memory</span><span class="v">∞ curiosity</span></div>
+              <div><span class="k">Location</span><span class="v">Arlington, TX</span></div>
+              <div class="divider">────────────────────────────</div>
+              <div class="color-bar">
+                <span style="background:#1a3a2e;"></span>
+                <span style="background:#00e5a0;"></span>
+                <span style="background:#ffbd2e;"></span>
+                <span style="background:#5dcaa5;"></span>
+                <span style="background:#ff5f56;"></span>
+                <span style="background:#e0e0e0;"></span>
+                <span style="background:#7a8a82;"></span>
+                <span style="background:#4a6a5d;"></span>
+              </div>
             </div>
           </div>
+
+          <div class="content-col">
+            <pre class="brand" id="brand"></pre>
+
+            <div class="intro">
+              <p>
+                I'm <span class="accent">Sidhant Gurung</span> &mdash; an electrical engineer at
+                UT Arlington, building hardware that matters. From high-voltage pulsed power
+                rigs to BLE wearables, I like problems where the math shows up on a scope.
+              </p>
+
+              <p>
+                I work in UTA's Pulsed Power &amp; Energy Laboratory and run undergraduate
+                research with Dr. Chenyun Pan on beyond-CMOS nanoelectronics, reconfigurable
+                computing, and neuromorphic circuits.
+              </p>
+
+              <p class="dim">
+                This summer I'm joining <span class="accent">Qorvo</span> in Richardson, TX as an
+                Applications Engineering Intern, focused on RF and hardware circuit design.
+                Long term: a hardware-focused MS at UT Austin.
+              </p>
+            </div>
+
+            <div class="now-playing">
+              <span class="label">● NOW</span>
+              <span class="text" id="now-playing-text"></span>
+            </div>
+
+            <div class="quick-stats">
+              <div class="stat-card">
+                <span class="num">3.68</span>
+                <div class="lbl">gpa / 4.00</div>
+              </div>
+              <div class="stat-card">
+                <span class="num">'27</span>
+                <div class="lbl">graduating</div>
+              </div>
+            </div>
+
+            <div class="orgs-strip">
+              <span class="tag-label">orgs</span>
+              <span class="tag">IEEE</span>
+              <span class="tag">IEEE-PES</span>
+              <span class="tag">ACM</span>
+              <span class="tag">SASE</span>
+            </div>
+          </div>
+
         </div>
+      </div>
 
-        <div class="content-col">
-          <pre class="brand" id="brand"></pre>
-
-          <div class="intro">
-            <p>
-              I'm <span class="accent">Sidhant Gurung</span> &mdash; an electrical engineer at
-              UT Arlington, building hardware that matters. From high-voltage pulsed power
-              rigs to BLE wearables, I like problems where the math shows up on a scope.
-            </p>
-
-            <p>
-              I work in UTA's Pulsed Power &amp; Energy Laboratory and run undergraduate
-              research with Dr. Chenyun Pan on beyond-CMOS nanoelectronics, reconfigurable
-              computing, and neuromorphic circuits.
-            </p>
-
-            <p class="dim">
-              This summer I'm joining <span class="accent">Qorvo</span> in Richardson, TX as an
-              Applications Engineering Intern, focused on RF and hardware circuit design.
-              Long term: a hardware-focused MS at UT Austin.
-            </p>
-          </div>
-
-          <div class="now-playing">
-            <span class="label">● NOW</span>
-            <span class="text" id="now-playing-text"></span>
-          </div>
-
-          <div class="quick-stats">
-            <div class="stat-card">
-              <span class="num">3.68</span>
-              <div class="lbl">gpa / 4.00</div>
-            </div>
-            <div class="stat-card">
-              <span class="num">'27</span>
-              <div class="lbl">graduating</div>
-            </div>
-          </div>
-
-          <div class="orgs-strip">
-            <span class="tag-label">orgs</span>
-            <span class="tag">IEEE</span>
-            <span class="tag">IEEE-PES</span>
-            <span class="tag">ACM</span>
-            <span class="tag">SASE</span>
-          </div>
-
-          <div class="tabs">
-            <button class="tab active" data-section="home">Home</button>
-            <button class="tab" data-section="education">Education</button>
-            <button class="tab" data-section="experience">Experience</button>
-            <button class="tab" data-section="projects">Projects</button>
-            <button class="tab" data-section="skills">Skills</button>
-            <button class="tab" data-section="blog">Blog</button>
-            <button class="tab" data-section="contact">Contact</button>
-          </div>
-        </div>
-
+      <div class="tabs">
+        <button class="tab active" data-section="home">Home</button>
+        <button class="tab" data-section="education">Education</button>
+        <button class="tab" data-section="experience">Experience</button>
+        <button class="tab" data-section="projects">Projects</button>
+        <button class="tab" data-section="skills">Skills</button>
+        <button class="tab" data-section="blog">Blog</button>
+        <button class="tab" data-section="contact">Contact</button>
       </div>
     </div>
 
     <!-- EDUCATION -->
     <div id="education" class="section">
-      <div class="section-head">~/education</div>
+      <div class="section-content">
+        <div class="section-head">~/education</div>
 
-      <div class="section-grid">
+        <div class="section-grid">
 
-        <div>
-          <div class="tl-entry">
-            <div class="tl-date">2022 – 2027 (expected)</div>
-            <div class="tl-role">B.S. Electrical Engineering</div>
-            <div class="tl-org">The University of Texas at Arlington</div>
-            <div class="tl-desc">
-              GPA: <span style="color: var(--accent)">3.68</span> &middot; Dean's List &middot; NSCS invitee
+          <div>
+            <div class="tl-entry">
+              <div class="tl-date">2022 – 2027 (expected)</div>
+              <div class="tl-role">B.S. Electrical Engineering</div>
+              <div class="tl-org">The University of Texas at Arlington</div>
+              <div class="tl-desc">
+                GPA: <span style="color: var(--accent)">3.68</span> &middot; Dean's List &middot; NSCS invitee
+              </div>
+            </div>
+
+            <div class="section-head" style="margin-top: 26px;">~/coursework</div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; font-size: 14px;">
+              <div><span style="color: var(--warn)">EE 5379</span> <span style="color: var(--muted)">Power System Stability &amp; Control</span></div>
+              <div><span style="color: var(--warn)">EE 3240</span> <span style="color: var(--muted)">Junior Design Laboratory</span></div>
+              <div><span style="color: var(--warn)">EE 3346</span> <span style="color: var(--muted)">Circuit Analysis II</span></div>
+              <div><span style="color: var(--warn)">EE 3314</span> <span style="color: var(--muted)">Microcontrollers &amp; Embedded Systems</span></div>
+              <div><span style="color: var(--warn)">EE 3318</span> <span style="color: var(--muted)">Analog &amp; Digital Signal Processing</span></div>
+              <div><span style="color: var(--warn)">EE 3407</span> <span style="color: var(--muted)">Electromagnetic Fields</span></div>
             </div>
           </div>
 
-          <div class="section-head" style="margin-top: 22px;">~/coursework</div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; font-size: 13px;">
-            <div><span style="color: var(--warn)">EE 5379</span> <span style="color: var(--muted)">Power System Stability &amp; Control</span></div>
-            <div><span style="color: var(--warn)">EE 3240</span> <span style="color: var(--muted)">Junior Design Laboratory</span></div>
-            <div><span style="color: var(--warn)">EE 3346</span> <span style="color: var(--muted)">Circuit Analysis II</span></div>
-            <div><span style="color: var(--warn)">EE 3314</span> <span style="color: var(--muted)">Microcontrollers &amp; Embedded Systems</span></div>
-            <div><span style="color: var(--warn)">EE 3318</span> <span style="color: var(--muted)">Analog &amp; Digital Signal Processing</span></div>
-            <div><span style="color: var(--warn)">EE 3407</span> <span style="color: var(--muted)">Electromagnetic Fields</span></div>
+          <div class="side-panel">
+            <div class="ph">// quick facts</div>
+            <div>Degree: B.S. EE</div>
+            <div>School: UT Arlington</div>
+            <div>Graduating: May 2027</div>
+            <div>GPA: <span style="color: var(--accent)">3.68 / 4.00</span></div>
+            <div>Honors: Dean's List, NSCS</div>
+            <div class="pi" style="margin-top: 12px;">Track: hardware, RF, embedded</div>
+            <div class="pi">Next step: FE exam → EIT</div>
+            <div class="pi">Grad school: UT Austin (target)</div>
           </div>
+
         </div>
 
-        <div class="side-panel">
-          <div class="ph">// quick facts</div>
-          <div>Degree: B.S. EE</div>
-          <div>School: UT Arlington</div>
-          <div>Graduating: May 2027</div>
-          <div>GPA: <span style="color: var(--accent)">3.68 / 4.00</span></div>
-          <div>Honors: Dean's List, NSCS</div>
-          <div class="pi" style="margin-top: 10px;">Track: hardware, RF, embedded</div>
-          <div class="pi">Next step: FE exam → EIT</div>
-          <div class="pi">Grad school: UT Austin (target)</div>
-        </div>
-
+        <div class="section-footer">>> 1 degree listed · 6 courses shown · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">→</kbd> <span style="color:var(--muted)">for experience</span></div>
       </div>
-
-      <div class="section-footer">>> 1 degree listed · 6 courses shown · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">→</kbd> <span style="color:var(--muted)">for experience</span></div>
 
       <div class="tabs" data-section-nav></div>
     </div>
 
     <!-- EXPERIENCE -->
     <div id="experience" class="section">
-      <div class="section-head">~/experience</div>
+      <div class="section-content">
+        <div class="section-head">~/experience</div>
 
-      <div class="section-grid">
+        <div class="section-grid">
 
-        <div>
-          <div class="tl-entry">
-            <div class="tl-date">Summer 2026 (incoming)</div>
-            <div class="tl-role">Applications Engineering Intern</div>
-            <div class="tl-org">Qorvo · Richardson, TX</div>
-            <div class="tl-desc">RF and hardware circuit design focus.</div>
-          </div>
+          <div>
+            <div class="tl-entry">
+              <div class="tl-date">Summer 2026 (incoming)</div>
+              <div class="tl-role">Applications Engineering Intern</div>
+              <div class="tl-org">Qorvo · Richardson, TX</div>
+              <div class="tl-desc">RF and hardware circuit design focus.</div>
+            </div>
 
-          <div class="tl-entry">
-            <div class="tl-date">Apr 2026 – Present</div>
-            <div class="tl-role">Undergraduate Researcher</div>
-            <div class="tl-org">Dr. Chenyun Pan · UT Arlington</div>
-            <div class="tl-desc">
-              Beyond-CMOS nanoelectronics, reconfigurable computing, neuromorphic circuits.
-              Currently working through a literature survey on Spiking Neural Networks with
-              unsupervised learning for control applications.
+            <div class="tl-entry">
+              <div class="tl-date">Apr 2026 – Present</div>
+              <div class="tl-role">Undergraduate Researcher</div>
+              <div class="tl-org">Dr. Chenyun Pan · UT Arlington</div>
+              <div class="tl-desc">
+                Beyond-CMOS nanoelectronics, reconfigurable computing, neuromorphic circuits.
+                Currently working through a literature survey on Spiking Neural Networks with
+                unsupervised learning for control applications.
+              </div>
+            </div>
+
+            <div class="tl-entry">
+              <div class="tl-date">Feb 2026 – Present</div>
+              <div class="tl-role">Undergraduate Research Assistant</div>
+              <div class="tl-org">Pulsed Power &amp; Energy Laboratory · UT Arlington</div>
+              <div class="tl-desc">
+                High-voltage systems research, energy storage characterization, precision
+                instrumentation for pulsed power applications.
+              </div>
+            </div>
+
+            <div class="tl-entry">
+              <div class="tl-date">Jan 2025 – Mar 2026</div>
+              <div class="tl-role">Head Server</div>
+              <div class="tl-org">Kura Sushi · Dallas, TX</div>
+              <div class="tl-desc">
+                Led front-of-house service across high-volume dinner shifts, trained and
+                onboarded new servers, and handled escalations directly with management.
+                Balanced this with a full EE courseload &mdash; taught me more about
+                showing up on time, owning mistakes, and leading without authority than
+                any lecture did.
+              </div>
             </div>
           </div>
 
-          <div class="tl-entry">
-            <div class="tl-date">Feb 2026 – Present</div>
-            <div class="tl-role">Undergraduate Research Assistant</div>
-            <div class="tl-org">Pulsed Power &amp; Energy Laboratory · UT Arlington</div>
-            <div class="tl-desc">
-              High-voltage systems research, energy storage characterization, precision
-              instrumentation for pulsed power applications.
-            </div>
+          <div class="side-panel">
+            <div class="ph">// current status</div>
+            <div style="color: var(--accent); font-weight: 500;">actively seeking</div>
+            <div style="color: var(--fg); font-size: 13px; margin-top: 4px;">Fall 2026 co-ops</div>
+
+            <div class="ph" style="margin-top: 16px;">// focus areas</div>
+            <div>Hardware engineering</div>
+            <div>RF circuit design</div>
+            <div>Embedded systems</div>
+
+            <div class="ph" style="margin-top: 16px;">// location</div>
+            <div>DFW preferred</div>
+            <div class="pi">Open to relocation</div>
+
+            <div class="ph" style="margin-top: 16px;">// eta</div>
+            <div class="pi">Available Aug 2026</div>
           </div>
 
-          <div class="tl-entry">
-            <div class="tl-date">Jan 2025 – Mar 2026</div>
-            <div class="tl-role">Head Server</div>
-            <div class="tl-org">Kura Sushi · Dallas, TX</div>
-            <div class="tl-desc">
-              Led front-of-house service across high-volume dinner shifts, trained and
-              onboarded new servers, and handled escalations directly with management.
-              Balanced this with a full EE courseload &mdash; taught me more about
-              showing up on time, owning mistakes, and leading without authority than
-              any lecture did.
-            </div>
-          </div>
         </div>
 
-        <div class="side-panel">
-          <div class="ph">// current status</div>
-          <div style="color: var(--accent); font-weight: 500;">actively seeking</div>
-          <div style="color: var(--fg); font-size: 12px; margin-top: 4px;">Fall 2026 co-ops</div>
-
-          <div class="ph" style="margin-top: 14px;">// focus areas</div>
-          <div>Hardware engineering</div>
-          <div>RF circuit design</div>
-          <div>Embedded systems</div>
-
-          <div class="ph" style="margin-top: 14px;">// location</div>
-          <div>DFW preferred</div>
-          <div class="pi">Open to relocation</div>
-
-          <div class="ph" style="margin-top: 14px;">// eta</div>
-          <div class="pi">Available Aug 2026</div>
-        </div>
-
+        <div class="section-footer">>> 4 entries listed · ~/experience · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">→</kbd> <span style="color:var(--muted)">for projects</span></div>
       </div>
-
-      <div class="section-footer">>> 4 entries listed · ~/experience · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">→</kbd> <span style="color:var(--muted)">for projects</span></div>
 
       <div class="tabs" data-section-nav></div>
     </div>
 
     <!-- PROJECTS -->
     <div id="projects" class="section">
-      <div class="section-head">~/projects <span class="count">// 4 items · <kbd style="color:var(--fg)">j/k</kbd> to browse · <kbd style="color:var(--fg)">enter</kbd> to open</span></div>
+      <div class="section-content">
+        <div class="section-head">~/projects <span class="count">// 4 items · <kbd style="color:var(--fg)">j/k</kbd> to browse · <kbd style="color:var(--fg)">enter</kbd> to open</span></div>
 
-      <div id="projects-list"></div>
+        <div id="projects-list"></div>
 
-      <div class="section-footer">>> 4 projects listed · click or <kbd style="color:var(--fg)">enter</kbd> to open writeup</div>
+        <div class="section-footer">>> 4 projects listed · click or <kbd style="color:var(--fg)">enter</kbd> to open writeup</div>
+      </div>
 
       <div class="tabs" data-section-nav></div>
     </div>
 
     <!-- SKILLS -->
     <div id="skills" class="section">
-      <div class="section-head">~/skills</div>
+      <div class="section-content">
+        <div class="section-head">~/skills</div>
 
-      <div class="skill-row">
-        <div class="skill-cat">power systems</div>
-        <div class="skill-desc">
-          Newton-Raphson and Gauss-Seidel power flow, continuation power flow, IEEE 39-bus
-          contingency analysis, TGOV1 turbine governor modeling via S-functions.
-          <div><span class="chip">MATLAB</span><span class="chip">MATPOWER</span><span class="chip">Simulink</span></div>
+        <div class="skill-row">
+          <div class="skill-cat">power systems</div>
+          <div class="skill-desc">
+            Newton-Raphson and Gauss-Seidel power flow, continuation power flow, IEEE 39-bus
+            contingency analysis, TGOV1 turbine governor modeling via S-functions.
+            <div><span class="chip">MATLAB</span><span class="chip">MATPOWER</span><span class="chip">Simulink</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="skill-row">
-        <div class="skill-cat">embedded &amp; firmware</div>
-        <div class="skill-desc">
-          Bare-metal on STM32 NUCLEO-F446RE and ESP32-C3. HAL libraries, Output Compare, USART2,
-          BLE comms, sensor integration.
-          <div><span class="chip">STM32</span><span class="chip">ESP32</span><span class="chip">HAL</span><span class="chip">I2C/UART</span></div>
+        <div class="skill-row">
+          <div class="skill-cat">embedded &amp; firmware</div>
+          <div class="skill-desc">
+            Bare-metal on STM32 NUCLEO-F446RE and ESP32-C3. HAL libraries, Output Compare, USART2,
+            BLE comms, sensor integration.
+            <div><span class="chip">STM32</span><span class="chip">ESP32</span><span class="chip">HAL</span><span class="chip">I2C/UART</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="skill-row">
-        <div class="skill-cat">circuit &amp; PCB</div>
-        <div class="skill-desc">
-          KiCad schematic capture, multi-layer PCB layout, DRC, Gerber generation for mill
-          fabrication. Simulation in Multisim, LTSpice, Wokwi.
-          <div><span class="chip">KiCad</span><span class="chip">Multisim</span><span class="chip">LTSpice</span></div>
+        <div class="skill-row">
+          <div class="skill-cat">circuit &amp; PCB</div>
+          <div class="skill-desc">
+            KiCad schematic capture, multi-layer PCB layout, DRC, Gerber generation for mill
+            fabrication. Simulation in Multisim, LTSpice, Wokwi.
+            <div><span class="chip">KiCad</span><span class="chip">Multisim</span><span class="chip">LTSpice</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="skill-row">
-        <div class="skill-cat">RF fundamentals</div>
-        <div class="skill-desc">
-          Smith chart, S-parameters, impedance matching, bench equipment.
-          <div><span class="chip">Smith chart</span><span class="chip">S-params</span><span class="chip">matching</span></div>
+        <div class="skill-row">
+          <div class="skill-cat">RF fundamentals</div>
+          <div class="skill-desc">
+            Smith chart, S-parameters, impedance matching, bench equipment.
+            <div><span class="chip">Smith chart</span><span class="chip">S-params</span><span class="chip">matching</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="skill-row">
-        <div class="skill-cat">DSP</div>
-        <div class="skill-desc">
-          DTFT analysis, convolution, system property analysis, sampling theory.
-          <div><span class="chip">MATLAB</span><span class="chip">DTFT</span></div>
+        <div class="skill-row">
+          <div class="skill-cat">DSP</div>
+          <div class="skill-desc">
+            DTFT analysis, convolution, system property analysis, sampling theory.
+            <div><span class="chip">MATLAB</span><span class="chip">DTFT</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="skill-row">
-        <div class="skill-cat">biomedical</div>
-        <div class="skill-desc">
-          Physiological signal analysis, ECG anomaly detection, biometric sensor integration.
-          <div><span class="chip">MAX30102</span><span class="chip">ECG</span><span class="chip">Autoencoders</span></div>
+        <div class="skill-row">
+          <div class="skill-cat">biomedical</div>
+          <div class="skill-desc">
+            Physiological signal analysis, ECG anomaly detection, biometric sensor integration.
+            <div><span class="chip">MAX30102</span><span class="chip">ECG</span><span class="chip">Autoencoders</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="section-head" style="margin-top: 24px;">~/offline</div>
-      <div style="color: var(--fg); font-size: 13px; line-height: 1.9;">
-        When I'm not at the bench: weightlifting, music, reading, traveling, gaming, hiking.
-      </div>
+        <div class="section-head" style="margin-top: 28px;">~/offline</div>
+        <div style="color: var(--fg); font-size: 14px; line-height: 1.9;">
+          When I'm not at the bench: weightlifting, music, reading, traveling, gaming, hiking.
+        </div>
 
-      <div class="section-footer">>> 6 skill categories · ~/skills</div>
+        <div class="section-footer">>> 6 skill categories · ~/skills</div>
+      </div>
 
       <div class="tabs" data-section-nav></div>
     </div>
 
     <!-- BLOG -->
     <div id="blog" class="section">
-      <div class="section-head">~/blog <span class="count">// lab notes &amp; writeups · <kbd style="color:var(--fg)">j/k</kbd> to browse · <kbd style="color:var(--fg)">enter</kbd> to read</span></div>
+      <div class="section-content">
+        <div class="section-head">~/blog <span class="count">// lab notes &amp; writeups · <kbd style="color:var(--fg)">j/k</kbd> to browse · <kbd style="color:var(--fg)">enter</kbd> to read</span></div>
 
-      <div id="blog-list"></div>
+        <div id="blog-list"></div>
 
-      <div class="feed-link">
-        >> subscribe via <a href="/feed.xml">RSS feed</a> &mdash; new posts about hardware bring-up,
-        interview prep, and things I break in the lab.
+        <div class="feed-link">
+          >> subscribe via <a href="/feed.xml">RSS feed</a> &mdash; new posts about hardware bring-up,
+          interview prep, and things I break in the lab.
+        </div>
       </div>
 
       <div class="tabs" data-section-nav></div>
@@ -1035,52 +1068,54 @@
 
     <!-- CONTACT -->
     <div id="contact" class="section">
-      <div class="section-head">~/contact</div>
+      <div class="section-content">
+        <div class="section-head">~/contact</div>
 
-      <div style="color: var(--fg); font-size: 13px; line-height: 1.7; max-width: 720px; margin-bottom: 16px;">
-        I'm actively looking for <span style="color: var(--accent)">Fall 2026 co-op</span>
-        opportunities in hardware, RF, and embedded roles &mdash; DFW preferred, open to elsewhere.
-        Drop me a message below, or reach me directly on LinkedIn.
-      </div>
-
-      <div class="contact-grid">
-
-        <div class="contact-card">
-          <div class="hdr">$ cat ~/.contact</div>
-          <div class="kv"><span class="k">name</span><span class="v">Sidhant Gurung</span></div>
-          <div class="kv"><span class="k">web</span><a class="link" href="https://sidhantgurung.me" target="_blank" rel="noopener">sidhantgurung.me</a></div>
-          <div class="kv"><span class="k">linkedin</span><a class="link" href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener">/in/sidhantgurung</a></div>
-          <div class="kv"><span class="k">resume</span><a class="link" href="https://sidhantgurung.me/resume.pdf" target="_blank" rel="noopener">resume.pdf</a></div>
-          <div class="kv"><span class="k">location</span><span class="v">DFW, TX</span></div>
+        <div style="color: var(--fg); font-size: 14px; line-height: 1.75; max-width: 820px; margin-bottom: 20px;">
+          I'm actively looking for <span style="color: var(--accent)">Fall 2026 co-op</span>
+          opportunities in hardware, RF, and embedded roles &mdash; DFW preferred, open to elsewhere.
+          Drop me a message below, or reach me directly on LinkedIn.
         </div>
 
-        <form class="contact-form" id="contact-form">
-          <div style="color: var(--accent); font-size: 11px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;">$ mail -s "hello" sidhant</div>
+        <div class="contact-grid">
 
-          <div class="form-line">
-            <label>name<span class="prompt-char">></span></label>
-            <input type="text" class="form-input" name="name" required autocomplete="name" />
+          <div class="contact-card">
+            <div class="hdr">$ cat ~/.contact</div>
+            <div class="kv"><span class="k">name</span><span class="v">Sidhant Gurung</span></div>
+            <div class="kv"><span class="k">web</span><a class="link" href="https://sidhantgurung.me" target="_blank" rel="noopener">sidhantgurung.me</a></div>
+            <div class="kv"><span class="k">linkedin</span><a class="link" href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener">/in/sidhantgurung</a></div>
+            <div class="kv"><span class="k">resume</span><a class="link" href="https://sidhantgurung.me/resume.pdf" target="_blank" rel="noopener">resume.pdf</a></div>
+            <div class="kv"><span class="k">location</span><span class="v">DFW, TX</span></div>
           </div>
 
-          <div class="form-line">
-            <label>email<span class="prompt-char">></span></label>
-            <input type="email" class="form-input" name="email" required autocomplete="email" />
-          </div>
+          <form class="contact-form" id="contact-form">
+            <div style="color: var(--accent); font-size: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;">$ mail -s "hello" sidhant</div>
 
-          <div class="form-line" style="flex-direction: column; align-items: stretch;">
-            <label style="margin-bottom: 4px;">message<span class="prompt-char">></span></label>
-            <textarea class="form-textarea" name="message" required rows="6" placeholder="type your message here..."></textarea>
-          </div>
+            <div class="form-line">
+              <label>name<span class="prompt-char">></span></label>
+              <input type="text" class="form-input" name="name" required autocomplete="name" />
+            </div>
 
-          <button type="submit" class="form-submit">send ↗</button>
-          <div class="form-status" id="form-status">&nbsp;</div>
-        </form>
+            <div class="form-line">
+              <label>email<span class="prompt-char">></span></label>
+              <input type="email" class="form-input" name="email" required autocomplete="email" />
+            </div>
 
-      </div>
+            <div class="form-line" style="flex-direction: column; align-items: stretch;">
+              <label style="margin-bottom: 6px;">message<span class="prompt-char">></span></label>
+              <textarea class="form-textarea" name="message" required rows="7" placeholder="type your message here..."></textarea>
+            </div>
 
-      <div style="margin-top: 20px; color: var(--muted); font-size: 12px;">
-        <span style="color: var(--accent)">sidhant</span>@<span style="color: var(--warn)">sidhantgurung.me</span> ~ % <span style="color: var(--fg)">exit</span><br>
-        Connection to sidhantgurung.me closed.<span class="cursor"></span>
+            <button type="submit" class="form-submit">send ↗</button>
+            <div class="form-status" id="form-status">&nbsp;</div>
+          </form>
+
+        </div>
+
+        <div style="margin-top: 24px; color: var(--muted); font-size: 13px;">
+          <span style="color: var(--accent)">sidhant</span>@<span style="color: var(--warn)">sidhantgurung.me</span> ~ % <span style="color: var(--fg)">exit</span><br>
+          Connection to sidhantgurung.me closed.<span class="cursor"></span>
+        </div>
       </div>
 
       <div class="tabs" data-section-nav></div>
@@ -1118,57 +1153,63 @@
 </div>
 
 <script>
+  // 110-char × 55-row portrait
   const portraitArt =
-"...........          ..             ..        ....:..    .......                                    \n" +
-".............................     ..   :+++**#%%%@@@%#**+=:.   .                                    \n" +
-"..................................  .:+%@@@@@@@@@@@@@@@@@%##+-:....                                 \n" +
-"...................................-#%@@@@@@@@@@@@@@@@@@@@@@@@%=.  .  ......                        \n" +
-":::..............................=#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#-...........        .              \n" +
-":::::......................... .*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+. ..     .                       \n" +
-":::::..........................*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#:                        .      \n" +
-":.::..........................=@@@@@@@@@@@@@@@@%@@%@@@@@@@@@@@@@@@@@*:..                            \n" +
-".............................:#@@@@@@@@@@@@@@#+-*%##*#@@%@@@@@@@@@@@#-.... .....                    \n" +
-"::.....::...............  ....*@@@@@@@@@%@%#+:. .--. -#=-#%#%@@@@@@@%-..................... .       \n" +
-"::::::::::...................:*@@@@@@@#**#%%##+-:. .-*#**#+--*#@@@@@@+:.....................        \n" +
-"::::::::::.:::..............:-+@@@%%#=---:::=+===...:--:..   ..**#@@%:.. ..  ..  .. ....... ......  \n" +
-"::::::::::..::................:#@%*=-#=+++++====:.. :+**+:....+.:*%@@*..     ..  .       .. ..  .   \n" +
-"::::::::::::::::.........::....=%#@#:#=*##%@#+*=-. ..=*##=::. +:*@*@*-..                            \n" +
-"::::::::::::::::::::...::::::..=**%#:-:--====--::.... .::..  ...::-=: .........  .  ................\n" +
-":::-----:::::::::::::..::::::.:*#=**-.   ....:--           .   .  .-................................\n" +
-":::::::::::::::::::::::::.....:++-++=-.   ..:-==*+--=.....     ... ::...............................\n" +
-":::::::::::::::::::::::::.....:-=-**+=-:::::::=#**=:-:....      ....................................\n" +
-"--::::::::::::::::::::::::::..:.:=-+#=++==-:::---::.         . :-.........:::.......................\n" +
-"-------::::::::::::::::::::::..:.:-=*+++++++#**##*++==-=*-.... :-:.......:..........................\n" +
-":::::::--::::::::::::::::::::::::.:..+*+++*#%%#+=--:..:-==:   .::::::...............................\n" +
-":--:------::::::::::::::::::::::::::.:*#**#*+*###***+-:  .::..:::::....::....::.....................\n" +
-"-------::::::::::::::::::::::::::::::.-%%##****#**++=-:...:--:::::::::::::::::::::.:.........:::::::\n" +
-"----------:::--:--:-::::::::::::::::::-*%@%#*+++=--:.    :--..::::::::::::::::::::::::::.....:::::::\n" +
-"------------------:::::::::::::::::::::+*%@@@%###***+===++-. .....::::::::::::::::::::::::::::::::::\n" +
-"---------------------::::::::::::::::+#++*%%@@@@@@@@@%#+-:.  .++=:.:::::::::::::::::::::::::::::::::\n" +
-"----------:--:::::-----:::::::::::::#@@+++*###%%%%#*=-..... ..#@@@#-::::::::::::::::::::::::::::::::\n" +
-"------------:::::::::---::::::::::=#@@@*+++****##*+-::....  ...+@@@+.:::::::::::::::::::::::::::::::\n" +
-"==-----------::::::::::::::::::-+#@@@@@%*+++******+=-.. .   .. =@@%*+=-:::::::::::::::::::::::::::::\n" +
-"--==---------------::::::-=+*#%@@@@@@@@@#*++++**++=-:....     -%@@%###*++=-:::::::::::::::::::::::::\n" +
-"=----------------::--==*#%@@@@%@@@@@@@@@@*++++++*+=--::.....:+@@@@%%###%%@%#+=--::::::::::::::::::::\n" +
-"----------------=+*#%%%%@@@@@@@@@@@@@@@@@@+========---:.:::=#@@@@@%%%#*##%@%%%%##*+=--:::::::::::::-\n" +
-"------==---=+*##%%%%%%%%%%@@@@@@@@@@@@@@@@@*+-:.....::. .-*@@@@@%%%%%%%##%%%%%%%%%%##**+-:::---::::-\n" +
-"======--+*#%%%%@@@@@@@@@@@@@@%%@@@@@@@@@@@@@@%+:   ..  :*@@@@@@@@@@%%%%%%%%%%%%%%%%%%%##**=---------\n" +
-"=====-+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#=   -*@@@@@@@@@@@@@@@%%%@@@@%%%%%%%%%%%%##*=-------\n" +
-"===-=#%@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#=#@@@@@@@@@@@@@@@@@@@@@@@@@@@%%@@@@@%@%%#**------\n" +
-"=--=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%+-----\n" +
-"==-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@*----\n" +
-"==+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@----\n" +
-"+=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@+---\n" +
-"=+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#--=\n" +
-"=#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@=-=\n" +
-"=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+==\n" +
-"+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#==\n" +
-"*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%==\n" +
-"*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+=\n" +
-"#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*=\n" +
-"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#=\n" +
-"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=\n" +
-"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+";
+"............            .                .         .  ...        .....                                        \n" +
+"...............................        ..  .===+=+*%##%%%#*++==-:.                                            \n" +
+"............................ ... .. .    :=#@@@@@@@@@@@@@@@@@@%**+-:.....                                     \n" +
+"........:..............................-+#@@@@@@@@@@@@@@@@@@@@@@@@@%#=.        .. .                           \n" +
+"::...................................-*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*:... .........         .               \n" +
+":::.:::............................:*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+: ... ......         .               \n" +
+":::::............................ .#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*:..                         .       \n" +
+":::::.............................#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%-                          .       \n" +
+".................................=@@@@@@@@@@@@@@@@@%#@@%@@@@@@@@@@@@@@@@@@@*:..                               \n" +
+"................................:#@@@@@@@@@@@@@@@%*=-#%#*++%@%%@@@@@@@@@@@@#-...........         ..           \n" +
+"::....:.::.................  ....*@@@@@@@@@@#@%#+-:. .::. .**:=%##%@@@@@@@@%:....................... .        \n" +
+":::::::::::.....................:*@@@@@@@@#*##%%%#*=-.. .:+#####+=-*#@@@@@@%+:........................        \n" +
+":::::::::::.::::...............:-+@@@@@@*=----:-=++++-...--=-::.. ...=%#@@@#:.. ...  ..  ........... ......   \n" +
+":::::::::::.::::.................-#@@#===#-===----=--..  .-++=:... .+:.-*@@@+..      ..  .      .... ..  ..   \n" +
+":::::::::::...:.:...........::....=@#@@--#=*%##@%=**=:. ..=##@#-::. ==.@%%@#=..                               \n" +
+":::::::::::::::::::::.....:::::...:+*@@=-=-=++***+=-:-.....:-==:... :::*==*-......   .         . .  ..........\n" +
+"::::-----:::::::::::::...:::::::..+#*+#=:....:::::::-.   .          ...  =-...................................\n" +
+"::::----:::::::::::::::::.::::::.:**==*=-..    ..:--::..   ......     .. .-...................................\n" +
+"::::::::::::::::::::::::::::.....:++-+++=-:.....::=+#%*+-*-....      .....:...................................\n" +
+"::::::::::::::::::::::::::::......:=-+*++=--:::::::++++-..:... .       ....:..................................\n" +
+"---:--:::::::::::::::::::::::::..:.:-=-#*=+++=--:-----:::.    .      .=........:.:::..........................\n" +
+"-------:::::::::::::::::::::::::..::.:-=*+++++++##*#%##*+===-**-.... .-::........:............................\n" +
+"::::::::--:::::::::::::::::::::::.::.:..:***++*#%%%*+---:...:===.    :::::::..................................\n" +
+":--::------:::::::::::::::::::::::::::::.-#***#*++*##*+++=-:   .:....::::..:..:::....:........................\n" +
+"-------::::::::::::::::::::::::::::::::::.=%####***####**+=-....:--::::::::..:::::::::::.:..............::::::\n" +
+"----------::::::::-:--::::::::::::::::::::-#%%##*++++=--:....  .--:.::::::::::::::::::::::.::.::......::::::::\n" +
+"-------------------:::::::::::::::::::::::-*#@@@%#*++++==-...:-==. .::::::::::::::::::::::::::::::::::::::::::\n" +
+"--------------------:::::::::::::::::::::-=+*#%@@@@@@@@%%%%##*+-. ..::...:::::::::::::::::::::::::::::::::::::\n" +
+"-------------------------:::::::::::::::*@%=+*##%%@@@@@@@@#+-:......*%#*=:::::::::::::::::::::::::::::::::::::\n" +
+"-----------:--::::::::----:::::::::::::+@@%+++**####%%#*+-:.....  . -@@@@#::::::::::::::::::::::::::::::::::::\n" +
+"--------------::::::::::-::::::::::::=#@@@@*++++****##*+=-:.....   . :%@@@=:::::::::::::::::::::::::::::::::::\n" +
+"===-----------:::::::::::::::::::-=*%@@@@@@%*++++******+=-:.   .  .. :%@@%**=-::::::::::::::::::::::::::::::::\n" +
+"---==----------------:::::::-=+*%%@@@@@@@@@@#*+++++**++==::....     :#@@@#####*++-::::::::::::::::::::::::::::\n" +
+"=------------------:::--=+*#%@@@@%%@@@@@@@@@@#++++++**+==-::.......=%@@@%%#*##%%@@#*+=--::::::::::::::::::::::\n" +
+"------------------==+##%%%@@@@@@@@@@@@@@@@@@@@*=++===+==---::.:::-*@@@@@%%%%#*#%%%@%%%##*++=-:::::::::::::::::\n" +
+"-------==----=+**##%%%%%%%%%@@@@@@@@@@@@@@@@@@@*==-::.::::::...:+%@@@@%%%%%%%###%%%%%%%%%%%##*+=-:::::-::::::-\n" +
+"======---=+*#%%%%%%%%%@%@@@@@@@@%@@@@@@@@@@@@@@@@%+:   . ..  .=%@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%##**+-----------\n" +
+"======-=*#%%@@@@@@@@@@@@@@@@@@@@%%@@@@@@@@@@@@@@@@@@#-. .  :+%@@@@@@@@@@@@@@%%%@@@%%%%%%%%%%%%%%%##*+---------\n" +
+"======+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%- :*@@@@@@@@@@@@@@@@@@@@%@@@@@%%@%%%%%%%%%%%##*=-------\n" +
+"=====#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%##+:-----\n" +
+"=---%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%#+-----\n" +
+"==-*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%@=----\n" +
+"===@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@#:---\n" +
+"+=#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@----\n" +
+"==@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+--=\n" +
+"=*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#-==\n" +
+"=#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%===\n" +
+"+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+==\n" +
+"+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*==\n" +
+"*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=+\n" +
+"*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+=\n" +
+"%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*=\n" +
+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#=\n" +
+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=\n" +
+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+";
 
   const brand = [
     " ___ _    _ _              _   ",
@@ -1280,11 +1321,8 @@
     }, 2800);
   }
 
-  if (!hasBooted) {
-    runBootSequence();
-  } else {
-    startTypingCmd();
-  }
+  if (!hasBooted) runBootSequence();
+  else startTypingCmd();
 
   const TABS_HTML = `
     <button class="tab" data-section="home">Home</button>
@@ -1407,8 +1445,8 @@
       mediaHtml +
       '<div class="modal-desc">' + p.long.map(para => '<p>' + para + '</p>').join('') + '</div>' +
       '<div class="modal-section-head">// stack</div>' +
-      '<div style="font-size: 12px; color: var(--muted);">' + p.stack + '</div>' +
-      '<div style="margin-top: 14px;">' + p.chips.map(c => '<span class="chip">' + c + '</span>').join('') + '</div>';
+      '<div style="font-size: 13px; color: var(--muted);">' + p.stack + '</div>' +
+      '<div style="margin-top: 16px;">' + p.chips.map(c => '<span class="chip">' + c + '</span>').join('') + '</div>';
 
     document.getElementById('modal-overlay').classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -1501,9 +1539,7 @@
     if (key !== 'projects') { focusedProjIdx = -1; clearProjFocus(); }
     if (key !== 'blog') { focusedBlogIdx = -1; clearBlogFocus(); }
     try {
-      if (history && history.replaceState) {
-        history.replaceState(null, '', '#' + key);
-      }
+      if (history && history.replaceState) history.replaceState(null, '', '#' + key);
     } catch (e) { /* no-op */ }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
