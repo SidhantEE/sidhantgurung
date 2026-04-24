@@ -16,6 +16,7 @@
     --accent: #00e5a0;
     --warn: #ffbd2e;
     --danger: #ff5f56;
+    --linkedin: #0a66c2;
     --border: #1a3a2e;
     --panel: #0d0d13;
     --header: #17171f;
@@ -131,6 +132,15 @@
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 14px;
+    transition: opacity 0.4s ease, margin-bottom 0.4s ease, max-height 0.5s ease;
+    overflow: hidden;
+    max-height: 200px;
+  }
+  .prompt-log.collapsed {
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+    pointer-events: none;
   }
   .prompt-log .cmd { color: var(--fg); }
   .prompt-log .shell-user { color: var(--accent); }
@@ -217,6 +227,42 @@
   .intro p { margin: 0 0 16px; }
   .intro p.dim { color: var(--muted); }
   .intro .accent { color: var(--accent); }
+
+  /* ===== Resume / connect buttons ===== */
+  .cta-row {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .cta-btn:hover {
+    background: rgba(0, 229, 160, 0.1);
+    border-color: var(--accent);
+  }
+  .cta-btn.primary {
+    background: rgba(0, 229, 160, 0.08);
+    border-color: rgba(0, 229, 160, 0.4);
+  }
+  .cta-btn.primary:hover {
+    background: rgba(0, 229, 160, 0.18);
+  }
+  .cta-btn .arrow { color: var(--muted); }
+  .cta-btn:hover .arrow { color: var(--accent); }
 
   .now-playing {
     margin-top: 20px;
@@ -522,6 +568,48 @@
     margin-left: 2px;
   }
 
+  /* ===== Blog & LinkedIn feed (two tabs side by side) ===== */
+  .blog-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .blog-tab {
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    padding: 8px 16px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 13px;
+    border-radius: 3px 3px 0 0;
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .blog-tab:hover { color: var(--fg); }
+  .blog-tab.active {
+    color: var(--accent);
+    background: rgba(0, 229, 160, 0.04);
+    border-color: var(--border);
+    border-bottom-color: var(--bg);
+    margin-bottom: -1px;
+  }
+  .blog-tab .badge {
+    font-size: 10px;
+    color: var(--muted);
+    background: rgba(122, 138, 130, 0.15);
+    padding: 1px 6px;
+    border-radius: 8px;
+  }
+  .blog-tab.active .badge {
+    color: var(--accent);
+    background: rgba(0, 229, 160, 0.12);
+  }
+
   .blog-post {
     padding: 16px 18px;
     margin-bottom: 14px;
@@ -539,6 +627,47 @@
   .blog-post .title { color: var(--accent); font-size: 15px; margin: 4px 0 6px; }
   .blog-post .excerpt { color: var(--fg); font-size: 13px; line-height: 1.65; max-width: 820px; }
   .blog-post .read-more { color: var(--muted); font-size: 12px; margin-top: 10px; }
+
+  .li-post {
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: rgba(10, 102, 194, 0.04);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .li-post:hover { background: rgba(10, 102, 194, 0.07); }
+  .li-post .li-icon {
+    width: 28px; height: 28px;
+    border-radius: 3px;
+    background: var(--linkedin);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600;
+    font-family: inherit;
+    flex-shrink: 0;
+  }
+  .li-post .li-meta { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+  .li-post .li-meta .li-date { color: var(--warn); }
+  .li-post .li-meta .li-sep { color: var(--dim); margin: 0 6px; }
+  .li-post .li-body { color: var(--fg); font-size: 13px; line-height: 1.65; max-width: 820px; white-space: pre-wrap; }
+  .li-post .li-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--linkedin);
+    font-size: 12px;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(10, 102, 194, 0.4);
+  }
+  .li-post .li-link:hover { border-bottom-color: var(--linkedin); }
+  .li-post .li-stats {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 8px;
+  }
 
   .feed-link { margin-top: 20px; font-size: 13px; color: var(--muted); }
   .feed-link a {
@@ -754,6 +883,7 @@
     .form-line label { min-width: 0; }
     .quick-stats { grid-template-columns: 1fr; }
     .terminal { min-height: auto; }
+    .li-post { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
     body { padding: 8px; }
@@ -844,9 +974,27 @@
 
               <p class="dim">
                 This summer I'm joining <span class="accent">Qorvo</span> in Richardson, TX as an
-                Applications Engineering Intern, focused on RF and hardware circuit design.
-                Long term: a hardware-focused MS at UT Austin.
+                Applications Engineering Intern. Long term: a hardware-focused MS at UT Austin.
               </p>
+            </div>
+
+            <!-- Resume + connect buttons -->
+            <div class="cta-row">
+              <a href="https://sidhantgurung.me/resume.pdf" target="_blank" rel="noopener" class="cta-btn primary">
+                <span>📄</span>
+                <span>view resume</span>
+                <span class="arrow">↗</span>
+              </a>
+              <a href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener" class="cta-btn">
+                <span>in</span>
+                <span>linkedin</span>
+                <span class="arrow">↗</span>
+              </a>
+              <a href="https://github.com/SidhantEE" target="_blank" rel="noopener" class="cta-btn">
+                <span>◆</span>
+                <span>github</span>
+                <span class="arrow">↗</span>
+              </a>
             </div>
 
             <div class="now-playing">
@@ -870,6 +1018,7 @@
               <span class="tag">IEEE</span>
               <span class="tag">IEEE-PES</span>
               <span class="tag">ACM</span>
+              <span class="tag">HKN</span>
               <span class="tag">SASE</span>
               <span class="tag">KCA</span>
             </div>
@@ -939,6 +1088,15 @@
                 </div>
               </div>
               <div class="org-card">
+                <div class="name">HKN</div>
+                <div class="role">Active Member</div>
+                <div class="desc">
+                  Eta Kappa Nu &mdash; the IEEE honor society recognizing academic excellence and
+                  leadership in electrical and computer engineering. Invitation-based, tied to GPA and
+                  involvement in the field.
+                </div>
+              </div>
+              <div class="org-card">
                 <div class="name">ACM</div>
                 <div class="role">Active Member</div>
                 <div class="desc">
@@ -972,14 +1130,14 @@
             <div>Graduating: May 2027</div>
             <div>GPA: <span style="color: var(--accent)">3.68 / 4.00</span></div>
             <div>Honors: Dean's List, NSCS</div>
-            <div class="pi" style="margin-top: 12px;">Track: hardware, RF, embedded</div>
+            <div class="pi" style="margin-top: 12px;">Track: hardware, embedded, power</div>
             <div class="pi">Next step: FE exam → EIT</div>
             <div class="pi">Grad school: UT Austin (target)</div>
           </div>
 
         </div>
 
-        <div class="section-footer">>> 1 degree · 6 courses · 5 orgs · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">→</kbd> <span style="color:var(--muted)">for experience</span></div>
+        <div class="section-footer">>> 1 degree · 6 courses · 6 orgs · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">→</kbd> <span style="color:var(--muted)">for experience</span></div>
       </div>
 
       <div class="tabs" data-section-nav></div>
@@ -1042,8 +1200,8 @@
 
             <div class="ph" style="margin-top: 16px;">// focus areas</div>
             <div>Hardware engineering</div>
-            <div>RF circuit design</div>
             <div>Embedded systems</div>
+            <div>Power electronics</div>
 
             <div class="ph" style="margin-top: 16px;">// location</div>
             <div>DFW preferred</div>
@@ -1107,14 +1265,6 @@
         </div>
 
         <div class="skill-row">
-          <div class="skill-cat">RF fundamentals</div>
-          <div class="skill-desc">
-            Smith chart, S-parameters, impedance matching, bench equipment.
-            <div><span class="chip">Smith chart</span><span class="chip">S-params</span><span class="chip">matching</span></div>
-          </div>
-        </div>
-
-        <div class="skill-row">
           <div class="skill-cat">DSP</div>
           <div class="skill-desc">
             DTFT analysis, convolution, system property analysis, sampling theory.
@@ -1135,25 +1285,38 @@
           When I'm not at the bench: weightlifting, music, reading, traveling, gaming, hiking.
         </div>
 
-        <div class="section-footer">>> 6 skill categories · ~/skills</div>
+        <div class="section-footer">>> 5 skill categories · ~/skills</div>
       </div>
 
       <div class="tabs" data-section-nav></div>
     </div>
 
-    <!-- BLOG -->
+    <!-- BLOG (with LinkedIn sub-tab) -->
     <div id="blog" class="section">
       <div class="section-content">
-        <div class="section-head">~/blog <span class="count">// lab notes &amp; writeups · <kbd style="color:var(--fg)">j/k</kbd> to browse · <kbd style="color:var(--fg)">enter</kbd> to read</span></div>
+        <div class="section-head">~/blog <span class="count">// writeups &amp; posts · <kbd style="color:var(--fg)">j/k</kbd> browse · <kbd style="color:var(--fg)">enter</kbd> open</span></div>
 
-        <div id="blog-list"></div>
-
-        <div class="feed-link">
-          >> subscribe via <a href="/feed.xml">RSS feed</a> &mdash; new posts about hardware bring-up,
-          interview prep, and things I break in the lab.
+        <div class="blog-tabs">
+          <button class="blog-tab active" data-blogtab="lab">
+            <span>lab notes</span>
+            <span class="badge" id="blog-count-lab">2</span>
+          </button>
+          <button class="blog-tab" data-blogtab="linkedin">
+            <span>linkedin</span>
+            <span class="badge" id="blog-count-li">0</span>
+          </button>
         </div>
 
-        <div class="section-footer">>> 2 posts · feed live at /feed.xml</div>
+        <div id="blog-list" data-pane="lab"></div>
+        <div id="linkedin-list" data-pane="linkedin" style="display: none;"></div>
+
+        <div class="feed-link">
+          >> subscribe to lab notes via <a href="/feed.xml">RSS</a> &middot;
+          follow on <a href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener">LinkedIn</a>
+          for live updates
+        </div>
+
+        <div class="section-footer">>> lab notes + linkedin feed · both panes keyboard-navigable</div>
       </div>
 
       <div class="tabs" data-section-nav></div>
@@ -1167,7 +1330,7 @@
         <div class="contact-top">
           <div class="contact-blurb">
             I'm actively looking for <span style="color: var(--accent)">Fall 2026 co-op</span>
-            opportunities in hardware, RF, and embedded roles &mdash; DFW preferred, open to elsewhere.
+            opportunities in hardware, embedded, and power electronics &mdash; DFW preferred, open to elsewhere.
             Drop me a message below, or reach me directly on LinkedIn or GitHub.
             <br><br>
             <span style="color: var(--muted); font-size: 13px;">
@@ -1318,6 +1481,15 @@
   typedEl.innerHTML = '<span class="typed-cmd"></span><span class="cursor-inline"></span>';
   const typedSpan = typedEl.querySelector('.typed-cmd');
 
+  function collapsePromptLog() {
+    if (!promptLog) return;
+    promptLog.classList.add('collapsed');
+    // Remove from DOM after the CSS transition finishes so it reclaims space
+    setTimeout(() => {
+      if (promptLog && promptLog.parentNode) promptLog.parentNode.removeChild(promptLog);
+    }, 600);
+  }
+
   function startTypingCmd() {
     setTimeout(function typeStep() {
       if (typeIdx < toType.length) {
@@ -1329,6 +1501,8 @@
           document.getElementById('post-type').style.display = 'block';
           const cursor = typedEl.querySelector('.cursor-inline');
           if (cursor) cursor.remove();
+          // Let the user read the prompt for ~2.2s, then collapse it away
+          setTimeout(collapsePromptLog, 2200);
         }, 320);
       }
     }, 400);
@@ -1376,8 +1550,8 @@
   if (!hasBooted) {
     runBootSequence();
   } else {
-    // Returning visit: hide the prompt log entirely
-    if (promptLog) promptLog.style.display = 'none';
+    // Returning visit: remove prompt log from DOM entirely, no animation
+    if (promptLog && promptLog.parentNode) promptLog.parentNode.removeChild(promptLog);
   }
 
   const TABS_HTML = `
@@ -1457,8 +1631,9 @@
       ],
       stack: "PIC microcontroller · thermistor · PI control · PWM · H-bridge",
       media: [
-        { type: "image", src: "https://sidhantgurung.me/AC_1.jpg", alt: "Temperature Speed Controller" },
-        { type: "placeholder", label: "schematic — TBD" }
+        { type: "image", src: "https://sidhantgurung.me/AC_1.jpg", alt: "Temperature Speed Controller — front" },
+        { type: "image", src: "https://sidhantgurung.me/AC_2.jpg", alt: "Temperature Speed Controller — detail" },
+        { type: "image", src: "https://sidhantgurung.me/AC_3.jpg", alt: "Temperature Speed Controller — wiring" }
       ]
     }
   ];
@@ -1535,20 +1710,19 @@
       ]
     },
     {
-      id: "qorvo-rf-prep",
+      id: "pulsed-power-bench",
       date: "Mar 24, 2026",
-      title: "Qorvo interview prep: what I actually studied for RF fundamentals",
-      excerpt: "Going into the Qorvo Applications Engineering final round, I had maybe 60% of the RF fundamentals I needed and zero practice explaining them out loud. Here's the study plan I built, the resources that actually moved the needle, and the two Smith chart problems that showed up in the interview.",
+      title: "First month in the Pulsed Power Lab",
+      excerpt: "Notes from my first month as an undergrad research assistant at UTA's Pulsed Power & Energy Lab — what I'm working on, what I've broken, and the reading list that actually moved the needle.",
       body: [
-        "<p>When I got the final-round email from Qorvo, I had about two weeks. I'd done well in the earlier rounds on the resume-driven and embedded-systems questions, but I knew RF was where I was weakest. The final round was with Phil Harris, Sr. Director of FAE, and \"applications engineering\" at an RF company means the interviewer expects you to actually think in Smith charts.</p>",
-        "<h3>My study list, ordered by ROI</h3>",
-        "<p><strong>1. Smith chart mechanics.</strong> Not just \"here's a Smith chart\" &mdash; I needed to be able to plot an impedance, move along a constant-VSWR circle, and do a simple L-match by inspection. Pozar Chapter 2 is the textbook answer but honestly the most useful thing was doing practice problems by hand on paper Smith charts. Printed 10 of them and worked through matching networks until it clicked.</p>",
-        "<p><strong>2. S-parameters and their physical meaning.</strong> S11, S21, etc. &mdash; I could recite the definitions but I couldn't explain what S21 of a low-noise amp actually tells you about its gain. The gap was between math and intuition. Fixed this by watching Keysight's S-parameter playlist on YouTube and then redrawing the signal-flow diagrams for a 2-port network from memory.</p>",
-        "<p><strong>3. Bench equipment I might get asked about.</strong> VNA, spectrum analyzer, signal generator, power meter. For each one: what does it measure, what can go wrong with calibration, and when would you pick it over the others? This came up almost verbatim in the interview.</p>",
-        "<h3>What actually showed up</h3>",
-        "<p>Two Smith chart problems. The first was a pure matching question &mdash; given a load impedance, design an L-match. The second was sneakier: \"If you had a ZL at the end of a quarter-wave transmission line, where does it show up on the chart?\" I froze for a second, remembered the quarter-wave transformer property (impedance inversion), and got there.</p>",
-        "<p>The bench-equipment question was \"you have a VNA and a spectrum analyzer. When do you use each?\" I talked about network characterization vs. signal power/spectral content. He seemed happy.</p>",
-        "<p>Got the offer two days later. The lesson I took away: for RF, you have to <em>practice speaking it</em>, not just read it. The interview isn't a test of knowledge, it's a test of whether you can think in the domain out loud.</p>"
+        "<p>I started at UTA's Pulsed Power &amp; Energy Laboratory in February. The lab runs high-voltage discharge experiments and needs a lot of supporting instrumentation &mdash; capacitor characterization, triggered spark gaps, current transducer calibration. I'm in the middle of it all.</p>",
+        "<h3>What I'm actually doing</h3>",
+        "<p>My first assignment has been energy storage characterization &mdash; running pulsed discharge tests on capacitor banks and logging the waveforms with a Tektronix scope plus a Rogowski coil for the current path. Most of the early work was just learning the safety protocols: grounding sticks, interlocks, the order you de-energize things in when a test ends.</p>",
+        "<h3>The reading list</h3>",
+        "<p>Bluhm's <em>Pulsed Power Systems</em> is the textbook everyone points to and it earns the reputation. I also work through IEEE Trans. on Plasma Science papers every week &mdash; the ones on compact Marx generators and capacitor lifetime under repetitive pulsing have been the most directly useful for what the lab does.</p>",
+        "<h3>Things I've broken (so far)</h3>",
+        "<p>One current probe, one BNC cable that I crushed under a scope foot, and my own sleep schedule. That's an acceptable ratio for month one.</p>",
+        "<p>The biggest adjustment coming from coursework to a real lab: waveforms don't care about your boundary conditions. You assume an ideal capacitor and the real one has ESR, self-inductance, and a voltage-dependent capacitance that doesn't show up until you push it hard. Humbling and fun.</p>"
       ]
     }
   ];
@@ -1567,6 +1741,75 @@
       '<div class="read-more">>> read more ↗</div>';
     div.addEventListener('click', () => openBlogPost(p));
     blogList.appendChild(div);
+  });
+  document.getElementById('blog-count-lab').textContent = blogPosts.length;
+
+  // ===== LINKEDIN POSTS =====
+  // LinkedIn has no public API, so this list is manually curated.
+  // When you publish a new post, add an entry here:
+  //   { date, text, link, likes, comments, placeholder? }
+  // - text: the post body (use \n for line breaks, kept as-is via white-space: pre-wrap)
+  // - link: URL to the actual post on LinkedIn
+  // - likes/comments: last known engagement (update when you remember)
+  // - placeholder: set to true for sample entries; remove after replacing with real ones
+  const linkedinPosts = [
+    {
+      date: "Apr 10, 2026",
+      text: "Excited to share that I'll be joining Qorvo this summer as an Applications Engineering Intern in Richardson, TX!\n\nHuge thanks to everyone at UTA and the IEEE-PES chapter who helped me prep — the interview process pushed me to sharpen fundamentals I'd been putting off, and I learned a lot in the process.\n\nLooking forward to applying what I've picked up in the lab to real hardware work this summer.",
+      link: "https://linkedin.com/in/sidhantgurung",
+      likes: 47,
+      comments: 12,
+      placeholder: true
+    },
+    {
+      date: "Mar 15, 2026",
+      text: "Just wrapped up HeartSync at the Axxess Hackathon at UT Dallas — 24 hours of React, PyTorch, and too much coffee.\n\nWe built an AI-powered ECG anomaly detector using a convolutional autoencoder. The model learns to reconstruct healthy rhythm, and anomalies show up as reconstruction error spikes on a live dashboard.\n\nBiggest lesson: cut scope ruthlessly. We killed two features in the last four hours to actually ship.",
+      link: "https://linkedin.com/in/sidhantgurung",
+      likes: 89,
+      comments: 23,
+      placeholder: true
+    }
+  ];
+
+  const liList = document.getElementById('linkedin-list');
+  linkedinPosts.forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = 'li-post';
+    div.setAttribute('data-idx', idx);
+
+    const phTag = p.placeholder
+      ? ' <span class="li-sep">·</span> <span style="color: var(--dim);">[sample — replace with your post]</span>'
+      : '';
+    const metaHtml =
+      '<span class="li-date">' + p.date + '</span>' +
+      '<span class="li-sep">·</span>' +
+      'sidhant gurung' + phTag;
+
+    const statsHtml = (p.likes != null)
+      ? '<div class="li-stats">♥ ' + p.likes + ' · 💬 ' + (p.comments || 0) + '</div>'
+      : '';
+
+    div.innerHTML =
+      '<div class="li-icon">in</div>' +
+      '<div>' +
+        '<div class="li-meta">' + metaHtml + '</div>' +
+        '<div class="li-body">' + p.text + '</div>' +
+        statsHtml +
+        '<a class="li-link" href="' + p.link + '" target="_blank" rel="noopener">view on LinkedIn ↗</a>' +
+      '</div>';
+    liList.appendChild(div);
+  });
+  document.getElementById('blog-count-li').textContent = linkedinPosts.length;
+
+  // Blog sub-tab switching
+  document.querySelectorAll('.blog-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.blogtab;
+      document.querySelectorAll('.blog-tab').forEach(t => t.classList.toggle('active', t === tab));
+      document.querySelectorAll('[data-pane]').forEach(pane => {
+        pane.style.display = pane.dataset.pane === target ? 'block' : 'none';
+      });
+    });
   });
 
   function openBlogPost(p) {
