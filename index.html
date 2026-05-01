@@ -416,13 +416,17 @@
 
   .section-head {
     color: var(--accent);
-    font-size: 14px;
-    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 18px;
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    text-transform: uppercase;
   }
   .section-head .count {
     color: var(--muted);
@@ -980,19 +984,19 @@
 
             <!-- Resume + connect buttons -->
             <div class="cta-row">
-              <a href="https://sidhantgurung.me/resume.pdf" target="_blank" rel="noopener" class="cta-btn primary">
+              <a href="/resume.pdf" target="_blank" rel="noopener" class="cta-btn primary" aria-label="View Resume (opens PDF in new tab)">
                 <span>📄</span>
-                <span>view resume</span>
+                <span>View Resume</span>
                 <span class="arrow">↗</span>
               </a>
               <a href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener" class="cta-btn">
                 <span>in</span>
-                <span>linkedin</span>
+                <span>LinkedIn</span>
                 <span class="arrow">↗</span>
               </a>
               <a href="https://github.com/SidhantEE" target="_blank" rel="noopener" class="cta-btn">
                 <span>◆</span>
-                <span>github</span>
+                <span>GitHub</span>
                 <span class="arrow">↗</span>
               </a>
             </div>
@@ -1341,12 +1345,12 @@
 
           <div class="contact-card">
             <div class="hdr">$ cat ~/.contact</div>
-            <div class="kv"><span class="k">name</span><span class="v">Sidhant Gurung</span></div>
-            <div class="kv"><span class="k">web</span><a class="link" href="https://sidhantgurung.me" target="_blank" rel="noopener">sidhantgurung.me</a></div>
-            <div class="kv"><span class="k">github</span><a class="link" href="https://github.com/SidhantEE" target="_blank" rel="noopener">@SidhantEE</a></div>
-            <div class="kv"><span class="k">linkedin</span><a class="link" href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener">/in/sidhantgurung</a></div>
-            <div class="kv"><span class="k">resume</span><a class="link" href="https://sidhantgurung.me/resume.pdf" target="_blank" rel="noopener">resume.pdf</a></div>
-            <div class="kv"><span class="k">location</span><span class="v">DFW, TX</span></div>
+            <div class="kv"><span class="k">Name</span><span class="v">Sidhant Gurung</span></div>
+            <div class="kv"><span class="k">Web</span><a class="link" href="https://sidhantgurung.me" target="_blank" rel="noopener">sidhantgurung.me</a></div>
+            <div class="kv"><span class="k">GitHub</span><a class="link" href="https://github.com/SidhantEE" target="_blank" rel="noopener">@SidhantEE</a></div>
+            <div class="kv"><span class="k">LinkedIn</span><a class="link" href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener">/in/sidhantgurung</a></div>
+            <div class="kv"><span class="k">Resume</span><a class="link" href="/resume.pdf" target="_blank" rel="noopener" aria-label="Download Resume (PDF)">resume.pdf</a></div>
+            <div class="kv"><span class="k">Location</span><span class="v">DFW, TX</span></div>
           </div>
         </div>
 
@@ -1516,19 +1520,19 @@
 
     const lines = [
       { t: 0,    html: '<span class="ok">[  OK  ]</span> Reached target Network.' },
-      { t: 180,  html: '<span class="ok">[  OK  ]</span> Started OpenSSH Daemon on port 22.' },
-      { t: 360,  html: '<span class="ok">[  OK  ]</span> Loaded module: sidhant_portfolio.ko' },
-      { t: 540,  html: '<span class="ok">[  OK  ]</span> Mounted /home/sidhant/projects' },
-      { t: 720,  html: '<span class="ok">[  OK  ]</span> Listening on 0.0.0.0:22' },
-      { t: 900,  html: '' },
-      { t: 1000, html: '<span class="cmd">$ ssh sidhant@sidhantgurung.me</span>' },
-      { t: 1250, html: '<span class="dim">The authenticity of host \'sidhantgurung.me\' can\'t be established.</span>' },
-      { t: 1400, html: '<span class="dim">ED25519 key fingerprint is SHA256:sidh4nt...gurUng.</span>' },
-      { t: 1550, html: '<span class="dim">Are you sure you want to continue connecting (yes/no)?</span> <span class="cmd">yes</span>' },
-      { t: 1800, html: '<span class="dim">Warning: Permanently added \'sidhantgurung.me\' to known_hosts.</span>' },
-      { t: 2000, html: '' },
-      { t: 2100, html: '<span style="color: var(--warn);">>> welcome. initializing session...</span>' },
-      { t: 2500, html: '' }
+      { t: 60,   html: '<span class="ok">[  OK  ]</span> Started OpenSSH Daemon on port 22.' },
+      { t: 120,  html: '<span class="ok">[  OK  ]</span> Loaded module: sidhant_portfolio.ko' },
+      { t: 180,  html: '<span class="ok">[  OK  ]</span> Mounted /home/sidhant/projects' },
+      { t: 240,  html: '<span class="ok">[  OK  ]</span> Listening on 0.0.0.0:22' },
+      { t: 300,  html: '' },
+      { t: 350,  html: '<span class="cmd">$ ssh sidhant@sidhantgurung.me</span>' },
+      { t: 450,  html: '<span class="dim">The authenticity of host \'sidhantgurung.me\' can\'t be established.</span>' },
+      { t: 520,  html: '<span class="dim">ED25519 key fingerprint is SHA256:sidh4nt...gurUng.</span>' },
+      { t: 590,  html: '<span class="dim">Are you sure you want to continue connecting (yes/no)?</span> <span class="cmd">yes</span>' },
+      { t: 680,  html: '<span class="dim">Warning: Permanently added \'sidhantgurung.me\' to known_hosts.</span>' },
+      { t: 770,  html: '' },
+      { t: 830,  html: '<span style="color: var(--warn);">>> welcome. initializing session...</span>' },
+      { t: 950,  html: '' }
     ];
 
     lines.forEach(line => {
@@ -1544,7 +1548,7 @@
       mainEl.style.display = 'flex';
       try { sessionStorage.setItem(BOOT_KEY, '1'); } catch (e) { /* no-op */ }
       startTypingCmd();
-    }, 2800);
+    }, 1050);
   }
 
   if (!hasBooted) {
