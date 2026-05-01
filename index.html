@@ -1299,7 +1299,7 @@
         <div class="blog-tabs">
           <button class="blog-tab active" data-blogtab="lab">
             <span>lab notes</span>
-            <span class="badge" id="blog-count-lab">2</span>
+            <span class="badge" id="blog-count-lab">0</span>
           </button>
           <button class="blog-tab" data-blogtab="linkedin">
             <span>linkedin</span>
@@ -1693,39 +1693,7 @@
     document.body.style.overflow = 'hidden';
   }
 
-  const blogPosts = [
-    {
-      id: "hfa-motor-driver",
-      date: "Apr 12, 2026",
-      title: "Switching the HFA motor driver from BS170 to 2N2222",
-      excerpt: "The BS170 MOSFET I originally spec'd for the haptic motor driver on the HFA kept getting warm under sustained PWM. A few hours on the bench, a scope trace that disagreed with the datasheet, and a quick swap to a 2N2222 NPN BJT later, the thermals settled.",
-      body: [
-        "<p>The revision-1 HFA board used a BS170 n-channel MOSFET as the haptic motor driver. On paper this made sense &mdash; low Vgs threshold, cheap, easy to hand-solder. In practice, under sustained PWM at our target duty cycle, the FET was getting warm enough that I could feel it through the silkscreen after 20 seconds of continuous haptic output.</p>",
-        "<h3>What the scope actually showed</h3>",
-        "<p>I started by probing Vgs and Vds simultaneously during PWM. The BS170 spec sheet promises a Vgs(th) in the 0.8&ndash;3.0V range, but I was seeing rise times that put us right on the edge of the linear region for a non-trivial chunk of each switching cycle. At our PWM frequency, that's a lot of time spent dissipating power instead of switching cleanly.</p>",
-        "<p>The ESP32-C3 GPIO can only drive ~20 mA and tops out at 3.3V &mdash; not a lot of overdrive to push the gate hard into saturation. A proper fix would be adding a gate driver IC, but that's a BOM cost + board real estate hit we didn't want on a student project.</p>",
-        "<h3>Why a 2N2222 worked better</h3>",
-        "<p>The 2N2222 is a bipolar junction transistor &mdash; current-controlled, not voltage-controlled. For the ~150 mA our haptic motor draws, the base current requirement is well within what a GPIO can source, and saturation is more forgiving of slow edges than a borderline-threshold MOSFET. Vce(sat) around 0.3V means small conduction losses, and switching is fast enough for our low-frequency PWM.</p>",
-        "<p>After the swap, steady-state temperature dropped noticeably and I stopped worrying about the haptic stage. Lesson: don't pick parts just because they're in your sophomore-year breadboard drawer.</p>"
-      ]
-    },
-    {
-      id: "pulsed-power-bench",
-      date: "Mar 24, 2026",
-      title: "First month in the Pulsed Power Lab",
-      excerpt: "Notes from my first month as an undergrad research assistant at UTA's Pulsed Power & Energy Lab — what I'm working on, what I've broken, and the reading list that actually moved the needle.",
-      body: [
-        "<p>I started at UTA's Pulsed Power &amp; Energy Laboratory in February. The lab runs high-voltage discharge experiments and needs a lot of supporting instrumentation &mdash; capacitor characterization, triggered spark gaps, current transducer calibration. I'm in the middle of it all.</p>",
-        "<h3>What I'm actually doing</h3>",
-        "<p>My first assignment has been energy storage characterization &mdash; running pulsed discharge tests on capacitor banks and logging the waveforms with a Tektronix scope plus a Rogowski coil for the current path. Most of the early work was just learning the safety protocols: grounding sticks, interlocks, the order you de-energize things in when a test ends.</p>",
-        "<h3>The reading list</h3>",
-        "<p>Bluhm's <em>Pulsed Power Systems</em> is the textbook everyone points to and it earns the reputation. I also work through IEEE Trans. on Plasma Science papers every week &mdash; the ones on compact Marx generators and capacitor lifetime under repetitive pulsing have been the most directly useful for what the lab does.</p>",
-        "<h3>Things I've broken (so far)</h3>",
-        "<p>One current probe, one BNC cable that I crushed under a scope foot, and my own sleep schedule. That's an acceptable ratio for month one.</p>",
-        "<p>The biggest adjustment coming from coursework to a real lab: waveforms don't care about your boundary conditions. You assume an ideal capacitor and the real one has ESR, self-inductance, and a voltage-dependent capacitance that doesn't show up until you push it hard. Humbling and fun.</p>"
-      ]
-    }
-  ];
+  const blogPosts = [];
 
   const blogList = document.getElementById('blog-list');
   blogPosts.forEach((p, idx) => {
@@ -1745,29 +1713,11 @@
   document.getElementById('blog-count-lab').textContent = blogPosts.length;
 
   // ===== LINKEDIN POSTS =====
-  // LinkedIn has no public API, so this list is manually curated.
-  // When you publish a new post, add an entry here:
-  //   { date, text, link, likes, comments, placeholder? }
-  // - text: the post body (use \n for line breaks, kept as-is via white-space: pre-wrap)
-  // - link: URL to the actual post on LinkedIn
-  // - likes/comments: last known engagement (update when you remember)
-  // - placeholder: set to true for sample entries; remove after replacing with real ones
   const linkedinPosts = [
     {
-      date: "Apr 10, 2026",
-      text: "Excited to share that I'll be joining Qorvo this summer as an Applications Engineering Intern in Richardson, TX!\n\nHuge thanks to everyone at UTA and the IEEE-PES chapter who helped me prep — the interview process pushed me to sharpen fundamentals I'd been putting off, and I learned a lot in the process.\n\nLooking forward to applying what I've picked up in the lab to real hardware work this summer.",
-      link: "https://linkedin.com/in/sidhantgurung",
-      likes: 47,
-      comments: 12,
-      placeholder: true
-    },
-    {
-      date: "Mar 15, 2026",
-      text: "Just wrapped up HeartSync at the Axxess Hackathon at UT Dallas — 24 hours of React, PyTorch, and too much coffee.\n\nWe built an AI-powered ECG anomaly detector using a convolutional autoencoder. The model learns to reconstruct healthy rhythm, and anomalies show up as reconstruction error spikes on a live dashboard.\n\nBiggest lesson: cut scope ruthlessly. We killed two features in the last four hours to actually ship.",
-      link: "https://linkedin.com/in/sidhantgurung",
-      likes: 89,
-      comments: 23,
-      placeholder: true
+      date: "Apr 28, 2026",
+      text: "Excited to share that I'll be joining Qorvo this summer as an Applications Engineering Intern!",
+      link: "https://www.linkedin.com/posts/sidhantgurung_electricalengineering-internship-qorvointern2026-share-7449512322097786880-WpLF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD4U2hsBH2kEtNUeQzJSKGzECDVMENHziyA"
     }
   ];
 
@@ -1777,24 +1727,16 @@
     div.className = 'li-post';
     div.setAttribute('data-idx', idx);
 
-    const phTag = p.placeholder
-      ? ' <span class="li-sep">·</span> <span style="color: var(--dim);">[sample — replace with your post]</span>'
-      : '';
     const metaHtml =
       '<span class="li-date">' + p.date + '</span>' +
       '<span class="li-sep">·</span>' +
-      'sidhant gurung' + phTag;
-
-    const statsHtml = (p.likes != null)
-      ? '<div class="li-stats">♥ ' + p.likes + ' · 💬 ' + (p.comments || 0) + '</div>'
-      : '';
+      'sidhant gurung';
 
     div.innerHTML =
       '<div class="li-icon">in</div>' +
       '<div>' +
         '<div class="li-meta">' + metaHtml + '</div>' +
         '<div class="li-body">' + p.text + '</div>' +
-        statsHtml +
         '<a class="li-link" href="' + p.link + '" target="_blank" rel="noopener">view on LinkedIn ↗</a>' +
       '</div>';
     liList.appendChild(div);
