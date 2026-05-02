@@ -700,6 +700,8 @@
     border: 1px solid #1f2128;
     border-radius: 4px;
     padding: 16px 18px;
+    justify-self: end;
+    align-self: start;
   }
   .contact-card .hdr {
     color: var(--accent);
@@ -1063,7 +1065,7 @@
               <div class="tl-role">B.S. Electrical Engineering</div>
               <div class="tl-org">The University of Texas at Arlington</div>
               <div class="tl-desc">
-                GPA: <span style="color: var(--accent)">3.68</span> &middot; Dean's List &middot; NSCS invitee
+                GPA: <span style="color: var(--accent)">3.68</span> &middot; Dean's List
               </div>
             </div>
 
@@ -1141,7 +1143,7 @@
             <div>School: UT Arlington</div>
             <div>Graduating: May 2027</div>
             <div>GPA: <span style="color: var(--accent)">3.68 / 4.00</span></div>
-            <div>Honors: Dean's List, NSCS</div>
+            <div>Honors: Dean's List</div>
             <div class="pi" style="margin-top: 12px;">Track: hardware, embedded, power</div>
             <div class="pi">Next step: FE exam → EIT</div>
             <div class="pi">Grad school: UT Austin (target)</div>
@@ -1194,7 +1196,7 @@
             <div class="tl-entry">
               <div class="tl-date">Jan 2025 – Mar 2026</div>
               <div class="tl-role">Head Server</div>
-              <div class="tl-org">Kura Sushi · Dallas, TX</div>
+              <div class="tl-org">Kura Sushi · Euless, TX</div>
               <div class="tl-desc">
                 Led front-of-house service across high-volume dinner shifts, trained and
                 onboarded new servers, and handled escalations directly with management.
@@ -1459,7 +1461,7 @@
   document.getElementById('motd').innerHTML = '"' + f.q + '" <span class="quote-by">&mdash; ' + f.by + '</span>';
 
   const nowPlaying = [
-    "Finalizing the HFA PCB for EE 3240 &mdash; DRC, Gerber, then off to the Bantam mill.",
+    "Wrapped up the HFA project for EE 3240 &mdash; PCB fabricated, assembled, and fully validated.",
     "Prepping for Qorvo &mdash; reviewing Smith charts, S-parameters, impedance matching.",
     "Reading Spiking Neural Network papers for Dr. Pan's lab.",
     "Debugging STM32 USART2 interrupts in HAL.",
@@ -1584,20 +1586,20 @@
     {
       id: "hfa",
       title: "▸ Haptic Focus Assistant (HFA)",
-      meta: "EE 3240 Junior Design · hardware lead · in progress",
-      short: "BLE wrist wearable that buzzes when distracting apps are detected. Owning schematic, power regulation, and motor driver on ESP32-C3 with custom PWM. Finalizing KiCad DRC and Gerber export for UTA's Bantam mill.",
+      meta: "EE 3240 Junior Design · hardware lead · completed",
+      short: "BLE wrist wearable that buzzes when distracting apps are detected. Designed schematic, power regulation, and motor driver on ESP32-C3 with custom PWM. Successfully fabricated and validated on UTA's Bantam mill.",
       chips: ["ESP32-C3", "BLE", "KiCad", "PWM"],
       long: [
-        "The HFA is a BLE-connected wrist wearable that provides haptic feedback when it detects distracting smartphone apps in use. I'm the hardware lead on the team &mdash; my scope covers the full circuit schematic, power regulation, and the motor driver stage.",
-        "Right now the focus is on the revision-2 board: I've resolved several KiCad DRC violations, added proper decoupling for the ESP32-C3's RF section, and I'm preparing the Gerbers for UTA's Bantam desktop mill. I recently switched the haptic motor driver from a BS170 MOSFET to a 2N2222 NPN BJT after bench measurements showed better drive characteristics at our target duty cycle.",
-        "Next up: assembly, bring-up, and validating the BLE link range against the companion iOS app."
+        "The HFA is a BLE-connected wrist wearable that provides haptic feedback when it detects distracting smartphone apps in use. I was the hardware lead on the team &mdash; my scope covered the full circuit schematic, power regulation, and the motor driver stage.",
+        "For the revision-2 board I resolved several KiCad DRC violations, added proper decoupling for the ESP32-C3's RF section, and fabricated the PCB on UTA's Bantam desktop mill. I switched the haptic motor driver from a BS170 MOSFET to a 2N2222 NPN BJT after bench measurements showed better drive characteristics at our target duty cycle.",
+        "The project is now complete &mdash; assembly, bring-up, and BLE link validation against the companion iOS app were all successful."
       ],
       stack: "ESP32-C3 · BLE · custom PWM · LDO regulation · 2-layer KiCad PCB · Bantam mill",
       media: [
-        { type: "image", src: "https://sidhantgurung.me/hfa-pcb-3d.png", alt: "HFA PCB 3D render" },
-        { type: "image", src: "https://sidhantgurung.me/hfa-pcb-layout.png", alt: "HFA PCB layout" },
-        { type: "video", src: "https://sidhantgurung.me/hfa-video-1.mp4", alt: "HFA bench test" },
-        { type: "video", src: "https://sidhantgurung.me/hfa-video-2.mp4", alt: "HFA haptic demo" }
+        { type: "image", src: "https://sidhantgurung.me/HFA-1.png", alt: "HFA PCB 3D render" },
+        { type: "image", src: "https://sidhantgurung.me/HFA-2.png", alt: "HFA PCB layout" },
+        { type: "image", src: "https://sidhantgurung.me/HFA-3.jpg", alt: "HFA completed build" },
+        { type: "video", src: "https://sidhantgurung.me/HFA.mp4", alt: "HFA demo" }
       ]
     },
     {
