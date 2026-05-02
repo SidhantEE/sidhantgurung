@@ -833,7 +833,6 @@
     margin-bottom: 18px;
   }
   .modal-media .media-slot {
-    aspect-ratio: 4 / 3;
     background: rgba(0, 229, 160, 0.04);
     border: 1px dashed var(--border);
     border-radius: 3px;
@@ -847,15 +846,18 @@
     position: relative;
     overflow: hidden;
   }
-  .modal-media .media-slot.has-media { border-style: solid; padding: 0; }
+  .modal-media .media-slot.has-media { border-style: solid; padding: 0; overflow: visible; }
   .modal-media .media-slot.full-width {
     grid-column: 1 / -1;
     aspect-ratio: 16 / 9;
   }
-  .modal-media img, .modal-media video {
+  .modal-media img {
     width: 100%; height: auto;
-    max-height: 400px;
     object-fit: contain;
+    border: none;
+  }
+  .modal-media video {
+    width: 100%; height: auto;
     border: none;
   }
   .modal-media iframe {
@@ -991,7 +993,7 @@
             <!-- Resume + connect buttons -->
             <div class="cta-row">
               <a href="/resume.pdf" target="_blank" rel="noopener" class="cta-btn primary" aria-label="View Resume (opens PDF in new tab)">
-                <span>📄</span>
+                <span>⎙</span>
                 <span>View Resume</span>
                 <span class="arrow">↗</span>
               </a>
