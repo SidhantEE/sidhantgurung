@@ -1581,14 +1581,12 @@
       id: "hfa",
       title: "▸ Haptic Focus Assistant (HFA)",
       meta: "EE 3240 Junior Design · hardware lead · completed",
-      short: "BLE wrist wearable that buzzes when distracting apps are detected. Designed schematic, power regulation, and motor driver on ESP32-C3 with custom PWM. Successfully fabricated and validated on UTA's Bantam mill.",
-      chips: ["ESP32-C3", "BLE", "KiCad", "PWM"],
+      short: "BLE wrist wearable that buzzes and gives audio feedback when distracting apps are detected. Designed schematic, power regulation, and motor driver on ESP32-C3 with PWM.",
+      chips: ["ESP32-C3", "BLE", "PWM", "KiCad", "Signal Processing"],
       long: [
-        "The HFA is a BLE-connected wrist wearable that provides haptic feedback when it detects distracting smartphone apps in use. I was the hardware lead on the team &mdash; my scope covered the full circuit schematic, power regulation, and the motor driver stage.",
-        "For the revision-2 board I resolved several KiCad DRC violations, added proper decoupling for the ESP32-C3's RF section, and fabricated the PCB on UTA's Bantam desktop mill. I switched the haptic motor driver from a BS170 MOSFET to a 2N2222 NPN BJT after bench measurements showed better drive characteristics at our target duty cycle.",
-        "The project is now complete &mdash; assembly, bring-up, and BLE link validation against the companion iOS app were all successful."
+        "The HFA is a BLE-connected wrist wearable that provides haptic feedback when it detects distracting smartphone apps in use. I was the hardware lead on the team &mdash; my scope covered the full circuit schematic, power regulation, and the motor driver stage. Flyback diodes were added across inductive loads to protect the driver transistor from back-EMF spikes during PWM switching at varying frequencies."
       ],
-      stack: "ESP32-C3 · BLE · custom PWM · LDO regulation · 2-layer KiCad PCB · Bantam mill",
+      stack: "ESP32-C3 · BLE · PWM · Signal Processing · Flyback Protection · KiCad",
       media: [
         { type: "image", src: "https://sidhantgurung.me/HFA-1.png", alt: "HFA PCB 3D render" },
         { type: "image", src: "https://sidhantgurung.me/HFA-2.png", alt: "HFA PCB layout" },
@@ -1631,13 +1629,13 @@
       id: "tempctrl",
       title: "▸ Temperature Speed Controller",
       meta: "sophomore design · team lead · completed",
-      short: "Closed-loop temperature control using PWM motor drive and sensor feedback for thermal-dependent speed regulation. Led a small team through design, build, and demo.",
-      chips: ["PWM", "Control Systems", "MCU"],
+      short: "Arduino-based motor controller that adjusts PWM speed based on hand-held temperature sensor readings. LCD displays live temperature and duty cycle. Led a small team through design, build, and demo.",
+      chips: ["Arduino", "PWM", "LCD", "Temperature Sensor"],
       long: [
-        "A closed-loop temperature-to-speed controller I led as team lead for sophomore design. A thermistor feeds an ADC; a PI loop in firmware drives a PWM motor controller based on the error signal.",
-        "Beyond the technical work, this was my first experience leading &mdash; splitting up schematic, firmware, and test responsibilities across the team, running weekly syncs, and landing the demo on time. Tuning the real control loop (overshoot, dead time, PWM noise on the sensor signal) was far more educational than simulating it."
+        "A temperature-dependent speed controller I led as team lead for sophomore design. A temperature sensor held by hand feeds the Arduino's ADC, and the firmware maps the reading to different PWM duty cycles to drive a motor at varying speeds.",
+        "An LCD display shows the current temperature and PWM duty cycle in real time, giving immediate visual feedback during operation. This was my first experience leading a team &mdash; splitting up responsibilities across the group and landing the demo on time."
       ],
-      stack: "PIC microcontroller · thermistor · PI control · PWM · H-bridge",
+      stack: "Arduino · Temperature Sensor · PWM · LCD Display",
       media: [
         { type: "image", src: "https://sidhantgurung.me/AC_1.jpg", alt: "Temperature Speed Controller — front" },
         { type: "image", src: "https://sidhantgurung.me/AC_2.png", alt: "Temperature Speed Controller — detail" },
