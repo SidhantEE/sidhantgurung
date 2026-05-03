@@ -1446,27 +1446,21 @@
   document.getElementById('brand').textContent = brand;
 
   const fortunes = [
-    { q: "Simple things should be simple, complex things should be possible.", by: "Alan Kay" },
-    { q: "The first principle is that you must not fool yourself &mdash; and you are the easiest person to fool.", by: "Richard Feynman" },
-    { q: "Any sufficiently advanced technology is indistinguishable from magic.", by: "Arthur C. Clarke" },
-    { q: "Controlling complexity is the essence of computer programming.", by: "Brian Kernighan" },
-    { q: "In theory, there is no difference between theory and practice. In practice, there is.", by: "Yogi Berra" },
-    { q: "The nice thing about standards is that there are so many to choose from.", by: "Andrew Tanenbaum" },
-    { q: "Hardware eventually fails. Software eventually works.", by: "Michael Hartung" },
-    { q: "Premature optimization is the root of all evil.", by: "Donald Knuth" },
-    { q: "The purpose of computing is insight, not numbers.", by: "Richard Hamming" },
-    { q: "Make it work, make it right, make it fast &mdash; in that order.", by: "Kent Beck" }
+    { q: "A real warrior doesn't need a sword.", by: "Thors" },
+    { q: "Overtime is something you work when there's a reason to.", by: "Nanami Kento" },
+    { q: "I have no fear of death. It's the weight of my promise that keeps me alive.", by: "Kurapika" },
+    { q: "I'm not gonna stop. Not now. Not ever.", by: "David Martinez" },
+    { q: "I want to be a kinder, gentler person. I want to be a stronger person.", by: "Thorfinn" },
+    { q: "I solemnly swear, from this moment forward, that I will never lose again!", by: "Zoro" }
   ];
   const f = fortunes[Math.floor(Math.random() * fortunes.length)];
   document.getElementById('motd').innerHTML = '"' + f.q + '" <span class="quote-by">&mdash; ' + f.by + '</span>';
 
   const nowPlaying = [
-    "Wrapped up the HFA project for EE 3240 &mdash; PCB fabricated, assembled, and fully validated.",
-    "Prepping for Qorvo &mdash; reviewing Smith charts, S-parameters, impedance matching.",
-    "Reading Spiking Neural Network papers for Dr. Pan's lab.",
-    "Debugging STM32 USART2 interrupts in HAL.",
-    "Wrapping up Lab 4 in EE 5379 &mdash; TGOV1 governor model via S-functions.",
-    "Cold-outreaching DFW hardware teams for Fall 2026 co-ops."
+    "Hitting PRs at the gym &mdash; back on the grind.",
+    "Reading about VLSI & FPGAs",
+    "Currently watching One Piece",
+    "Binge &mdash; Reading Manwhas ",
   ];
   document.getElementById('now-playing-text').innerHTML =
     nowPlaying[Math.floor(Math.random() * nowPlaying.length)];
