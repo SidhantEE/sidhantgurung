@@ -43,6 +43,7 @@
 
   .terminal {
     position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 1480px;
     background: var(--bg);
@@ -905,6 +906,25 @@
     .footer-bar { padding: 10px 14px; font-size: 12px; flex-direction: column; gap: 4px; align-items: flex-start; }
     .portrait-col { flex-direction: column; }
   }
+  .mobile-notice {
+    display: none;
+    position: fixed; inset: 0;
+    background: var(--bg);
+    color: var(--fg);
+    z-index: 9999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    padding: 32px;
+  }
+  .mobile-notice .accent { color: var(--accent); }
+  .mobile-notice p { margin-top: 12px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 768px) {
+    .mobile-notice { display: flex; }
+    .terminal { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .cursor, .cursor-inline, .pulse { animation: none; }
     .section.active { animation: none; }
@@ -912,6 +932,14 @@
 </style>
 </head>
 <body>
+
+<canvas id="starfield" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+
+<div class="mobile-notice">
+  <span class="accent" style="font-size: 32px;">&gt;_</span>
+  <h2 style="margin-top: 16px;">Best viewed on desktop</h2>
+  <p>This site is optimized for a desktop experience.<br>Please visit on a larger screen for the full terminal interface.</p>
+</div>
 
 <div class="terminal">
 
@@ -1919,5 +1947,52 @@
   });
 </script>
 
+<script>
+(function(){
+  var c = document.getElementById('starfield');
+  var ctx = c.getContext('2d');
+  var stars = [];
+  var COUNT = 120;
+
+  function resize(){
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for(var i = 0; i < COUNT; i++){
+    stars.push({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.4 + 0.3,
+      dx: (Math.random() - 0.5) * 0.15,
+      dy: (Math.random() - 0.5) * 0.15,
+      o: Math.random() * 0.5 + 0.15,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+
+  function draw(t){
+    ctx.clearRect(0, 0, c.width, c.height);
+    for(var i = 0; i < stars.length; i++){
+      var s = stars[i];
+      s.x += s.dx;
+      s.y += s.dy;
+      if(s.x < 0) s.x = c.width;
+      if(s.x > c.width) s.x = 0;
+      if(s.y < 0) s.y = c.height;
+      if(s.y > c.height) s.y = 0;
+      var flicker = s.o + Math.sin(t * 0.001 + s.phase) * 0.15;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,229,160,' + flicker + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
 </body>
 </html>
