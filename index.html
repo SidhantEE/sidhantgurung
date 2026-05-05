@@ -1895,7 +1895,7 @@
   } catch (e) { /* no-op */ }
 
   // Contact form
-  const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY_HERE";
+  const WEB3FORMS_KEY = "4a5d6bb4-2ec7-4e4c-b540-1120e86ec5e3";
   const FORM_ENDPOINT = null;
 
   const form = document.getElementById('contact-form');
@@ -1925,7 +1925,7 @@
         headers = { 'Content-Type': 'application/json' };
       } else {
         url = 'https://api.web3forms.com/submit';
-        body = JSON.stringify({ access_key: WEB3FORMS_KEY, ...payload });
+        body = JSON.stringify({ access_key: WEB3FORMS_KEY, botcheck: '', ...payload });
         headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
       }
       const res = await fetch(url, { method: 'POST', headers, body });
