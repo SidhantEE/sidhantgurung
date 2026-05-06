@@ -268,7 +268,7 @@
   .now-playing {
     margin-top: 20px;
     padding: 10px 14px;
-    border: 1px dashed var(--border);
+    border: 1px solid var(--border);
     border-radius: 3px;
     font-size: 13px;
     color: var(--muted);
@@ -1003,18 +1003,18 @@
               <p>
                 I'm <span class="accent">Sidhant Gurung</span> &mdash; an electrical engineer at
                 UT Arlington, building hardware that matters. From high-voltage pulsed power
-                rigs to BLE wearables, I like problems where the math shows up on a scope.
+                rigs to BLE wearables.
               </p>
 
               <p>
-                I work in UTA's Pulsed Power &amp; Energy Laboratory and run undergraduate
-                research with Dr. Chenyun Pan on beyond-CMOS nanoelectronics, reconfigurable
-                computing, and neuromorphic circuits.
+                I work in UTA's Pulsed Power &amp; Energy Laboratory and am exploring
+                preliminary coursework under Dr. Chenyun Pan in beyond-CMOS nanoelectronics, reconfigurable
+                computing, and neuromorphic hardware.
               </p>
 
               <p class="dim">
                 This summer I'm joining <span class="accent">Qorvo</span> in Richardson, TX as an
-                Applications Engineering Intern. Long term: a hardware-focused MS at UT Austin.
+                Applications Engineering Intern.
               </p>
             </div>
 
@@ -1172,7 +1172,6 @@
             <div>Honors: Dean's List</div>
             <div class="pi" style="margin-top: 12px;">Track: hardware, embedded, power</div>
             <div class="pi">Next step: FE exam → EIT</div>
-            <div class="pi">Grad school: UT Austin (target)</div>
           </div>
 
         </div>
@@ -1200,12 +1199,12 @@
 
             <div class="tl-entry">
               <div class="tl-date">Apr 2026 – Present</div>
-              <div class="tl-role">Undergraduate Researcher</div>
+              <div class="tl-role">Preliminary Assignments — Neuromorphic Hardware</div>
               <div class="tl-org">Dr. Chenyun Pan · UT Arlington</div>
               <div class="tl-desc">
-                Beyond-CMOS nanoelectronics, reconfigurable computing, neuromorphic circuits.
-                Currently working through a literature survey on Spiking Neural Networks with
-                unsupervised learning for control applications.
+                Completing preliminary assignments in beyond-CMOS nanoelectronics, reconfigurable
+                computing, and neuromorphic hardware. Currently working through a literature survey
+                on Spiking Neural Networks with unsupervised learning for control applications.
               </div>
             </div>
 
@@ -1604,23 +1603,6 @@
 
   const projects = [
     {
-      id: "hfa",
-      title: "▸ Haptic Focus Assistant (HFA)",
-      meta: "EE 3240 Junior Design · hardware lead · completed",
-      short: "BLE wrist wearable that buzzes and gives audio feedback when distracting apps are detected. Designed schematic, power regulation, and motor driver on ESP32-C3 with PWM.",
-      chips: ["ESP32-C3", "BLE", "PWM", "KiCad", "Signal Processing"],
-      long: [
-        "The HFA is a BLE-connected wrist wearable that provides haptic feedback when it detects distracting smartphone apps in use. I was the hardware lead on the team &mdash; my scope covered the full circuit schematic, power regulation, and the motor driver stage. Flyback diodes were added across inductive loads to protect the driver transistor from back-EMF spikes during PWM switching at varying frequencies."
-      ],
-      stack: "ESP32-C3 · BLE · PWM · Signal Processing · Flyback Protection · KiCad",
-      media: [
-        { type: "image", src: "https://sidhantgurung.me/HFA-1.png", alt: "HFA PCB 3D render" },
-        { type: "image", src: "https://sidhantgurung.me/HFA-2.png", alt: "HFA PCB layout" },
-        { type: "image", src: "https://sidhantgurung.me/HFA-3.jpg", alt: "HFA completed build" },
-        { type: "video", src: "https://sidhantgurung.me/HFA.mp4", alt: "HFA demo" }
-      ]
-    },
-    {
       id: "bio",
       title: "▸ AI Biometric System",
       meta: "personal project · in progress",
@@ -1628,12 +1610,29 @@
       chips: ["ESP32", "MAX30102", "TFLite Micro", "C++"],
       long: [
         "A desktop biometric system that pairs PPG heart-rate data (MAX30102) with galvanic skin response (Grove GSR) to classify user mental state in real time. The model runs on-device via TensorFlow Lite Micro on an ESP32.",
-        "Current scope is a USB-powered breadboard prototype: 16-bit ADC for the GSR front-end, I²C to the MAX30102, and wireless telemetry for logging. Battery and enclosure revisions come later &mdash; the priority right now is getting the classifier reliable across different skin conditions."
+        "Current scope is a USB-powered breadboard prototype: I²C to the MAX30102, and wireless telemetry for logging. Battery and enclosure revisions come later &mdash; the priority right now is getting the classifier reliable across different skin conditions."
       ],
-      stack: "ESP32 · MAX30102 (I²C) · Grove GSR · 16-bit ADC · TFLite Micro · C++",
+      stack: "ESP32 · MAX30102 (I²C) · Grove GSR · TFLite Micro · C++",
       media: [
         { type: "placeholder", label: "block diagram — TBD" },
         { type: "placeholder", label: "breadboard photo — TBD" }
+      ]
+    },
+    {
+      id: "hfa",
+      title: "▸ Haptic Focus Assistant (HFA)",
+      meta: "EE 3240 Junior Design · hardware lead · completed",
+      short: "BLE wrist wearable that buzzes and gives audio feedback when distracting apps are detected. Designed schematic, power regulation, and motor driver on ESP32-C3 with PWM.",
+      chips: ["ESP32-C3", "BLE", "PWM", "KiCad", "Signal Processing", "Kotlin", "Power Distribution"],
+      long: [
+        "The HFA is a BLE-connected wrist wearable that provides haptic feedback when it detects distracting smartphone apps in use. I was the hardware lead on the team &mdash; my scope covered the full circuit schematic, power regulation, and the motor driver stage."
+      ],
+      stack: "ESP32-C3 · BLE · PWM · Signal Processing · KiCad · Kotlin · Power Distribution",
+      media: [
+        { type: "image", src: "https://sidhantgurung.me/HFA-1.png", alt: "HFA PCB 3D render" },
+        { type: "image", src: "https://sidhantgurung.me/HFA-2.png", alt: "HFA PCB layout" },
+        { type: "image", src: "https://sidhantgurung.me/HFA-3.jpg", alt: "HFA completed build" },
+        { type: "video", src: "https://sidhantgurung.me/HFA.mp4", alt: "HFA demo" }
       ]
     },
     {
@@ -1656,12 +1655,12 @@
       title: "▸ Temperature Speed Controller",
       meta: "sophomore design · team lead · completed",
       short: "Arduino-based motor controller that adjusts PWM speed based on hand-held temperature sensor readings. LCD displays live temperature and duty cycle. Led a small team through design, build, and demo.",
-      chips: ["Arduino", "PWM", "LCD", "Temperature Sensor"],
+      chips: ["Arduino", "PWM", "LCD", "Temperature Sensor", "Fusion 360", "Oscilloscope"],
       long: [
-        "A temperature-dependent speed controller I led as team lead for sophomore design. A temperature sensor held by hand feeds the Arduino's ADC, and the firmware maps the reading to different PWM duty cycles to drive a motor at varying speeds.",
+        "A temperature-dependent speed controller I led as team lead for sophomore design. A temperature sensor held by hand feeds the Arduino, and the firmware maps the reading to different PWM duty cycles to drive a motor at varying speeds.",
         "An LCD display shows the current temperature and PWM duty cycle in real time, giving immediate visual feedback during operation. This was my first experience leading a team &mdash; splitting up responsibilities across the group and landing the demo on time."
       ],
-      stack: "Arduino · Temperature Sensor · PWM · LCD Display",
+      stack: "Arduino · Temperature Sensor · PWM · LCD Display · Fusion 360 · Oscilloscope",
       media: [
         { type: "image", src: "https://sidhantgurung.me/AC_1.jpg", alt: "Temperature Speed Controller — front" },
         { type: "image", src: "https://sidhantgurung.me/AC_2.png", alt: "Temperature Speed Controller — detail" },
