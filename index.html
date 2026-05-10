@@ -148,7 +148,7 @@
   @keyframes blink { 50% { opacity: 0; } }
 
   .motd {
-    color: var(--dim);
+    color: var(--muted);
     font-size: 15px;
     font-style: italic;
     margin-bottom: 18px;
@@ -160,18 +160,30 @@
   .motd .quote-by { color: var(--muted); font-style: normal; }
 
   .main-grid {
-    display: grid;
-    grid-template-columns: minmax(420px, 560px) 1fr;
-    gap: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     flex: 1;
+  }
+
+  .hero-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
   }
 
   .portrait-col { display: flex; flex-direction: column; gap: 16px; }
 
   /* Real photo portrait — replaces ASCII */
   .photo-portrait {
-    width: 100%;
-    max-width: 440px;
+    width: 280px;
+    min-width: 280px;
     aspect-ratio: 500 / 489;
     object-fit: cover;
     border: 1px solid var(--border);
@@ -189,7 +201,8 @@
     border: 1px solid var(--border);
     border-radius: 3px;
     background: rgba(0, 229, 160, 0.02);
-    max-width: 440px;
+    width: 280px;
+    min-width: 280px;
   }
   .sysinfo .k { color: var(--accent); display: inline-block; min-width: 75px; }
   .sysinfo .v { color: var(--fg); }
@@ -198,14 +211,17 @@
   .sysinfo .color-bar span { width: 15px; height: 11px; display: inline-block; }
 
   .content-col { display: flex; flex-direction: column; flex: 1; }
+  .info-row .intro { flex: 1; }
+  .info-row .sysinfo { flex-shrink: 0; }
 
   .brand {
     color: var(--accent);
     font-size: 13px;
     line-height: 1;
     white-space: pre;
-    margin-bottom: 20px;
+    margin: 0;
     user-select: none;
+    align-self: center;
   }
 
   .intro {
@@ -872,9 +888,10 @@
 
   @media (max-width: 980px) {
     .contact-top { grid-template-columns: 1fr; }
-    .main-grid { grid-template-columns: 1fr; gap: 24px; }
-    .portrait-col { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
-    .photo-portrait { max-width: 320px; }
+    .hero-row { flex-direction: column; }
+    .info-row { flex-direction: column; }
+    .photo-portrait { width: 100%; min-width: 0; max-width: 320px; }
+    .sysinfo { width: 100%; min-width: 0; }
   }
   @media (max-width: 820px) {
     .sysinfo { font-size: 13px; }
@@ -962,9 +979,12 @@
 
         <div class="main-grid">
 
-          <div class="portrait-col">
+          <div class="hero-row">
             <img class="photo-portrait" id="portrait-img" alt="Sidhant Gurung" />
+            <pre class="brand" id="brand"></pre>
+          </div>
 
+          <div class="info-row">
             <div class="sysinfo">
               <div><span class="k">OS</span><span class="v">UT Arlington 4.0 LTS</span></div>
               <div><span class="k">Host</span><span class="v">EE undergrad, BS '27</span></div>
@@ -983,10 +1003,6 @@
                 <span style="background:#4a6a5d;"></span>
               </div>
             </div>
-          </div>
-
-          <div class="content-col">
-            <pre class="brand" id="brand"></pre>
 
             <div class="intro">
               <p>
@@ -1030,10 +1046,6 @@
               </a>
             </div>
 
-            <div class="now-playing">
-              <span class="label">● NOW</span>
-              <span class="text" id="now-playing-text"></span>
-            </div>
 
             <div class="quick-stats">
               <div class="stat-card">
@@ -1055,7 +1067,7 @@
               <span class="tag">SASE</span>
               <span class="tag">KCA</span>
             </div>
-          </div>
+          </div><!-- /info-row -->
 
         </div>
       </div>
@@ -1427,11 +1439,6 @@
           <button type="submit" class="form-submit">send ↗</button>
           <div class="form-status" id="form-status">&nbsp;</div>
         </form>
-
-        <div style="margin-top: 24px; color: var(--muted); font-size: 13px;">
-          <span style="color: var(--accent)">sidhant</span>@<span style="color: var(--warn)">sidhantgurung.me</span> ~ % <span style="color: var(--fg)">exit</span><br>
-          Connection to sidhantgurung.me closed.<span class="cursor"></span>
-        </div>
 
         <div class="section-footer">>> end of session · thanks for visiting · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">q</kbd> <span style="color:var(--muted)">to return home</span></div>
       </div>
@@ -1967,7 +1974,7 @@
   var c = document.getElementById('starfield');
   var ctx = c.getContext('2d');
   var stars = [];
-  var COUNT = 120;
+  var COUNT = 200;
 
   function resize(){
     c.width = window.innerWidth;
