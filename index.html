@@ -57,18 +57,7 @@
   }
 
   .terminal::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 229, 160, 0.025) 0px,
-      rgba(0, 229, 160, 0.025) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    z-index: 10;
+    display: none;
   }
 
   .title-bar {
@@ -1030,12 +1019,12 @@
                 <span class="arrow">↗</span>
               </a>
               <a href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener" class="cta-btn">
-                <span>in</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 <span>LinkedIn</span>
                 <span class="arrow">↗</span>
               </a>
               <a href="https://github.com/SidhantEE" target="_blank" rel="noopener" class="cta-btn">
-                <span>◆</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                 <span>GitHub</span>
                 <span class="arrow">↗</span>
               </a>
@@ -1294,7 +1283,7 @@
           <div class="skill-desc">
             Bare-metal on STM32 NUCLEO-F446RE and ESP32-C3. HAL libraries, Output Compare, USART2,
             BLE comms, sensor integration.
-            <div><span class="chip">STM32</span><span class="chip">ESP32</span><span class="chip">HAL</span><span class="chip">I2C/UART</span></div>
+            <div><span class="chip">STM32</span><span class="chip">ESP32</span><span class="chip">HAL</span><span class="chip">I2C/UART</span><span class="chip">GPIO</span><span class="chip">ADC</span><span class="chip">PWM</span><span class="chip">SPI</span><span class="chip">BLE</span></div>
           </div>
         </div>
 
@@ -1323,12 +1312,36 @@
           </div>
         </div>
 
-        <div class="section-head" style="margin-top: 28px;">~/offline</div>
+        <div class="skill-row">
+          <div class="skill-cat">languages</div>
+          <div class="skill-desc">
+            Systems and scripting across embedded, simulation, and data workflows.
+            <div><span class="chip">C</span><span class="chip">C++</span><span class="chip">Python</span><span class="chip">MATLAB</span></div>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-cat">hardware &amp; lab</div>
+          <div class="skill-desc">
+            Bench instrumentation, manual assembly, and physiological signal acquisition.
+            <div><span class="chip">Oscilloscope</span><span class="chip">Soldering</span><span class="chip">Signal Conditioning</span><span class="chip">PPG</span><span class="chip">GSR</span></div>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-cat">tools &amp; CAD</div>
+          <div class="skill-desc">
+            Control theory, 3D modeling, and mechanical drafting.
+            <div><span class="chip">Control Systems</span><span class="chip">Fusion 360</span><span class="chip">AutoCAD</span></div>
+          </div>
+        </div>
+
+        <div class="section-head" style="margin-top: auto; padding-top: 28px;">~/offline</div>
         <div style="color: var(--fg); font-size: 14px; line-height: 1.9;">
           When I'm not at the bench: weightlifting, music, reading, traveling, gaming, hiking.
         </div>
 
-        <div class="section-footer">>> 5 skill categories · ~/skills</div>
+        <div class="section-footer">>> 8 skill categories · ~/skills</div>
       </div>
 
       <div class="tabs" data-section-nav></div>
@@ -1434,9 +1447,9 @@
       <kbd>j</kbd> <kbd>k</kbd> browse &middot; <kbd>esc</kbd> close &middot; <kbd>q</kbd> home ]
     </div>
     <div class="right">
-      <a href="https://github.com/SidhantEE" target="_blank" rel="noopener" title="GitHub">github</a>
+      <a href="https://github.com/SidhantEE" target="_blank" rel="noopener" title="GitHub" style="display:inline-flex;align-items:center;gap:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>github</a>
       <span class="sep">·</span>
-      <a href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener" title="LinkedIn">linkedin</a>
+      <a href="https://linkedin.com/in/sidhantgurung" target="_blank" rel="noopener" title="LinkedIn" style="display:inline-flex;align-items:center;gap:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin</a>
       <span class="sep">·</span>
       <span class="loc">Arlington, TX</span>
       <span class="sep">·</span>
