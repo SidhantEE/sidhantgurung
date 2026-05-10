@@ -1508,14 +1508,6 @@
   const f = fortunes[Math.floor(Math.random() * fortunes.length)];
   document.getElementById('motd').innerHTML = '"' + f.q + '" <span class="quote-by">&mdash; ' + f.by + '</span>';
 
-  const nowPlaying = [
-    "Hitting PRs at the gym &mdash; back on the grind.",
-    "Reading about VLSI & FPGAs",
-    "Currently watching One Piece"
-  ];
-  document.getElementById('now-playing-text').innerHTML =
-    nowPlaying[Math.floor(Math.random() * nowPlaying.length)];
-
   function updateClock() {
     const now = new Date();
     const pad = n => String(n).padStart(2, '0');
