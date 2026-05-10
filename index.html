@@ -148,7 +148,7 @@
   @keyframes blink { 50% { opacity: 0; } }
 
   .motd {
-    color: var(--muted);
+    color: var(--dim);
     font-size: 15px;
     font-style: italic;
     margin-bottom: 18px;
@@ -1030,6 +1030,10 @@
               </a>
             </div>
 
+            <div class="now-playing">
+              <span class="label">● NOW</span>
+              <span class="text" id="now-playing-text"></span>
+            </div>
 
             <div class="quick-stats">
               <div class="stat-card">
@@ -1423,6 +1427,11 @@
           <button type="submit" class="form-submit">send ↗</button>
           <div class="form-status" id="form-status">&nbsp;</div>
         </form>
+
+        <div style="margin-top: 24px; color: var(--muted); font-size: 13px;">
+          <span style="color: var(--accent)">sidhant</span>@<span style="color: var(--warn)">sidhantgurung.me</span> ~ % <span style="color: var(--fg)">exit</span><br>
+          Connection to sidhantgurung.me closed.<span class="cursor"></span>
+        </div>
 
         <div class="section-footer">>> end of session · thanks for visiting · <span style="color:var(--muted)">press</span> <kbd style="color:var(--fg)">q</kbd> <span style="color:var(--muted)">to return home</span></div>
       </div>
@@ -1958,7 +1967,7 @@
   var c = document.getElementById('starfield');
   var ctx = c.getContext('2d');
   var stars = [];
-  var COUNT = 200;
+  var COUNT = 120;
 
   function resize(){
     c.width = window.innerWidth;
