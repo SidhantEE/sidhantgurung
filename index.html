@@ -912,6 +912,20 @@
     .mobile-notice { display: flex; }
     .terminal { display: none; }
   }
+  @media (max-height: 900px) {
+    .terminal {
+      transform: scale(0.85);
+      transform-origin: top center;
+      min-height: auto;
+    }
+  }
+  @media (max-height: 750px) {
+    .terminal {
+      transform: scale(0.75);
+      transform-origin: top center;
+      min-height: auto;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .cursor, .cursor-inline, .pulse { animation: none; }
     .section.active { animation: none; }
