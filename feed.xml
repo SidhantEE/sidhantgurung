@@ -7,7 +7,7 @@
     <description>Lab notes, writeups, and debugging stories from Sidhant Gurung — EE undergrad at UT Arlington working on hardware, RF, and embedded systems.</description>
     <language>en-us</language>
     <managingEditor>sidhant@sidhantgurung.me (Sidhant Gurung)</managingEditor>
-    <lastBuildDate>Sun, 19 Apr 2026 18:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 11 May 2026 12:00:00 -0500</lastBuildDate>
     <generator>hand-crafted with care</generator>
 
     <item>
@@ -15,23 +15,7 @@
       <link>https://sidhantgurung.me/#blog/impostor-syndrome-first-internship</link>
       <guid isPermaLink="false">sidhantgurung.me/blog/impostor-syndrome-first-internship-2026-05</guid>
       <pubDate>Sun, 11 May 2026 12:00:00 -0500</pubDate>
-      <description>Feeling impostor syndrome at my first internship — but learning to trust the process, study relentlessly with resources like MIT 6.622, ask questions, embrace mistakes, and protect myself from burnout. Documenting the journey on TikTok @lockedinee.</description>
-    </item>
-
-    <item>
-      <title>Switching the HFA motor driver from BS170 to 2N2222</title>
-      <link>https://sidhantgurung.me/#blog/hfa-motor-driver</link>
-      <guid isPermaLink="false">sidhantgurung.me/blog/hfa-motor-driver-2026-04</guid>
-      <pubDate>Sat, 12 Apr 2026 14:30:00 -0500</pubDate>
-      <description>The BS170 MOSFET I originally spec'd for the haptic motor driver on the HFA board kept getting warm under sustained PWM. After a few hours on the bench measuring Vgs thresholds and on-resistance across duty cycles, I switched to a 2N2222 NPN BJT and the thermals settled. Full writeup with scope traces and the decision criteria I used.</description>
-    </item>
-
-    <item>
-      <title>Qorvo interview prep: what I actually studied for RF fundamentals</title>
-      <link>https://sidhantgurung.me/#blog/qorvo-rf-prep</link>
-      <guid isPermaLink="false">sidhantgurung.me/blog/qorvo-rf-prep-2026-03</guid>
-      <pubDate>Mon, 24 Mar 2026 09:00:00 -0500</pubDate>
-      <description>Going into the Qorvo Applications Engineering final round, I had maybe 60% of the RF fundamentals I needed and zero practice talking about them out loud. Here's the study plan I built, the resources that actually moved the needle (hint: not YouTube), and the two Smith chart problems that showed up in the interview.</description>
+      <description>In a week I will begin my internship at Qorvo, and I can't help but feel impostor syndrome. Here's how I'm dealing with it, what I'm studying, and why I'm choosing to embrace the process.</description>
     </item>
 
   </channel>
