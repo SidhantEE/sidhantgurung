@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sidhant Gurung — lab notes</title>
+    <title>Sidhant Gurung</title>
     <link>https://sidhantgurung.me/</link>
     <atom:link href="https://sidhantgurung.me/feed.xml" rel="self" type="application/rss+xml" />
-    <description>Lab notes, writeups, and debugging stories from Sidhant Gurung — EE undergrad at UT Arlington working on hardware, RF, and embedded systems.</description>
+    <description>Writeups and debugging stories from Sidhant Gurung — EE undergrad at UT Arlington working on hardware, RF, and embedded systems.</description>
     <language>en-us</language>
     <managingEditor>sidhant@sidhantgurung.me (Sidhant Gurung)</managingEditor>
     <lastBuildDate>Sun, 11 May 2026 12:00:00 -0500</lastBuildDate>
